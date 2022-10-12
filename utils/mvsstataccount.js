@@ -208,8 +208,12 @@ const dataAccount = async (name) => {
                 me.teamId = gameData.server_data.PlayerData[myId].TeamIndex;
                 me.teamScore = gameData.server_data.TeamScores[gameData.server_data.PlayerData[myId].TeamIndex];
                 
+                if (gameData.server_data.PlayerData[enemyId].AccountId.slice(0,3).toLowerCase() != 'bot') {
+                    enemy.username = gameData.server_data.PlayerData[enemyId].Username;
+                } else {
+                    enemy.username = "BOT";
+                }
                 enemy.character = nameCharacter((gameData.server_data.PlayerData[enemyId].CharacterSlug).slice(10,999));
-                enemy.username = gameData.server_data.PlayerData[enemyId].Username;
                 enemy.accountId = gameData.server_data.PlayerData[enemyId].AccountId;
                 enemy.damageDone = gameData.server_data.PlayerData[enemyId].DamageDone;
                 enemy.ringOuts = gameData.server_data.PlayerData[enemyId].Ringouts;
@@ -419,8 +423,12 @@ const dataAccount = async (name) => {
                     me.teamId = gameData.server_data.PlayerData[myId].TeamIndex;
                     me.teamScore = gameData.server_data.TeamScores[gameData.server_data.PlayerData[myId].TeamIndex];
                     
+                    if (gameData.server_data.PlayerData[allyId].AccountId.slice(0,3).toLowerCase() != 'bot') {
+                        ally.username = gameData.server_data.PlayerData[allyId].Username;
+                    } else {
+                        ally.username = "BOT";
+                    }
                     ally.character = nameCharacter((gameData.server_data.PlayerData[allyId].CharacterSlug).slice(10,999));    
-                    ally.username = gameData.server_data.PlayerData[allyId].Username;
                     ally.accountId = gameData.server_data.PlayerData[allyId].AccountId;
                     ally.damageDone = gameData.server_data.PlayerData[allyId].DamageDone;
                     ally.ringOuts = gameData.server_data.PlayerData[allyId].Ringouts;
@@ -428,8 +436,12 @@ const dataAccount = async (name) => {
                     ally.teamId = gameData.server_data.PlayerData[allyId].TeamIndex;
                     ally.teamScore = gameData.server_data.TeamScores[gameData.server_data.PlayerData[allyId].TeamIndex];
 
+                    if (gameData.server_data.PlayerData[enemyId].AccountId.slice(0,3).toLowerCase() != 'bot') {
+                        enemy.username = gameData.server_data.PlayerData[enemyId].Username;
+                    } else {
+                        enemy.username = "BOT";
+                    }
                     enemy.character = nameCharacter((gameData.server_data.PlayerData[enemyId].CharacterSlug).slice(10,999));
-                    enemy.username = gameData.server_data.PlayerData[enemyId].Username;
                     enemy.accountId = gameData.server_data.PlayerData[enemyId].AccountId;
                     enemy.damageDone = gameData.server_data.PlayerData[enemyId].DamageDone;
                     enemy.ringOuts = gameData.server_data.PlayerData[enemyId].Ringouts;
@@ -437,8 +449,12 @@ const dataAccount = async (name) => {
                     enemy.teamId = gameData.server_data.PlayerData[enemyId].TeamIndex;
                     enemy.teamScore = gameData.server_data.TeamScores[gameData.server_data.PlayerData[enemyId].TeamIndex];
                     
+                    if (gameData.server_data.PlayerData[enemyId2].AccountId.slice(0,3).toLowerCase() != 'bot') {
+                        enemy2.username = gameData.server_data.PlayerData[enemyId2].Username;
+                    } else {
+                        enemy2.username = "BOT";
+                    }
                     enemy2.character = nameCharacter((gameData.server_data.PlayerData[enemyId2].CharacterSlug).slice(10,999));
-                    enemy2.username = gameData.server_data.PlayerData[enemyId2].Username;
                     enemy2.accountId = gameData.server_data.PlayerData[enemyId2].AccountId;
                     enemy2.damageDone = gameData.server_data.PlayerData[enemyId2].DamageDone;
                     enemy2.ringOuts = gameData.server_data.PlayerData[enemyId2].Ringouts;

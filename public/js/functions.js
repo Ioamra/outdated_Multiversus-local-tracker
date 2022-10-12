@@ -106,6 +106,14 @@ function formateMmrDiff (mmrDiff) {
     }
 }
 
+function isBot (username) {
+    if (username == 'BOT') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function search(name) {
     if (name.length > 2) {
         fetch('mvsstatsearch?name='+name)
