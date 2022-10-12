@@ -39,88 +39,88 @@ function showSelect() {
                     }
                     if (dataLoadMmrByRank == 250) {
                         htmlSelectMmrByRank =
-                        '<option>25</option>'+
-                        '<option>50</option>'+
-                        '<option>100</option>'+
-                        '<option selected>250</option>';
+                            '<option>25</option>'+
+                            '<option>50</option>'+
+                            '<option>100</option>'+
+                            '<option selected>250</option>';
                         htmlSelectTopCharactersPopularityByMmr =
-                        '<option>25</option>'+
-                        '<option>50</option>'+
-                        '<option>100</option>'+
-                        '<option>250</option>'+
-                        '<option selected>500</option>';
+                            '<option>25</option>'+
+                            '<option>50</option>'+
+                            '<option>100</option>'+
+                            '<option>250</option>'+
+                            '<option selected>500</option>';
                     } else if (dataLoadMmrByRank == 500) {
                         htmlSelectMmrByRank =
-                        '<option>25</option>'+
-                        '<option>50</option>'+
-                        '<option>100</option>'+
-                        '<option>250</option>'+
-                        '<option selected>500</option>';
+                            '<option>25</option>'+
+                            '<option>50</option>'+
+                            '<option>100</option>'+
+                            '<option>250</option>'+
+                            '<option selected>500</option>';
                         htmlSelectTopCharactersPopularityByMmr =
-                        '<option>25</option>'+
-                        '<option>50</option>'+
-                        '<option>100</option>'+
-                        '<option>250</option>'+
-                        '<option>500</option>'+
-                        '<option>750</option>'+
-                        '<option selected>1000</option>';
+                            '<option>25</option>'+
+                            '<option>50</option>'+
+                            '<option>100</option>'+
+                            '<option>250</option>'+
+                            '<option>500</option>'+
+                            '<option>750</option>'+
+                            '<option selected>1000</option>';
                     } else if (dataLoadMmrByRank == 750) {
                         htmlSelectMmrByRank =
-                        '<option>25</option>'+
-                        '<option>50</option>'+
-                        '<option>100</option>'+
-                        '<option>250</option>'+
-                        '<option>500</option>'+
-                        '<option selected>750</option>';
+                            '<option>25</option>'+
+                            '<option>50</option>'+
+                            '<option>100</option>'+
+                            '<option>250</option>'+
+                            '<option>500</option>'+
+                            '<option selected>750</option>';
                         htmlSelectTopCharactersPopularityByMmr =
-                        '<option>25</option>'+
-                        '<option>50</option>'+
-                        '<option>100</option>'+
-                        '<option>250</option>'+
-                        '<option>500</option>'+
-                        '<option>750</option>'+
-                        '<option>1000</option>'+
-                        '<option selected>1500</option>';
+                            '<option>25</option>'+
+                            '<option>50</option>'+
+                            '<option>100</option>'+
+                            '<option>250</option>'+
+                            '<option>500</option>'+
+                            '<option>750</option>'+
+                            '<option>1000</option>'+
+                            '<option selected>1500</option>';
                     } else if (dataLoadMmrByRank == 1000) {
                         htmlSelectMmrByRank =
-                        '<option>25</option>'+
-                        '<option>50</option>'+
-                        '<option>100</option>'+
-                        '<option>250</option>'+
-                        '<option>500</option>'+
-                        '<option>750</option>'+
-                        '<option selected>1000</option>';
+                            '<option>25</option>'+
+                            '<option>50</option>'+
+                            '<option>100</option>'+
+                            '<option>250</option>'+
+                            '<option>500</option>'+
+                            '<option>750</option>'+
+                            '<option selected>1000</option>';
                         htmlSelectTopCharactersPopularityByMmr =
-                        '<option>25</option>'+
-                        '<option>50</option>'+
-                        '<option>100</option>'+
-                        '<option>250</option>'+
-                        '<option>500</option>'+
-                        '<option>750</option>'+
-                        '<option>1000</option>'+
-                        '<option>1500</option>'+
-                        '<option selected>2000</option>';
+                            '<option>25</option>'+
+                            '<option>50</option>'+
+                            '<option>100</option>'+
+                            '<option>250</option>'+
+                            '<option>500</option>'+
+                            '<option>750</option>'+
+                            '<option>1000</option>'+
+                            '<option>1500</option>'+
+                            '<option selected>2000</option>';
                     } else if (dataLoadMmrByRank > 1000) {
                         htmlSelectMmrByRank =
-                        '<option>25</option>'+
-                        '<option>50</option>'+
-                        '<option>100</option>'+
-                        '<option>250</option>'+
-                        '<option>500</option>'+
-                        '<option>750</option>'+
-                        '<option>1000</option>'+
-                        '<option selected>'+dataLoadMmrByRank+'</option>';
+                            '<option>25</option>'+
+                            '<option>50</option>'+
+                            '<option>100</option>'+
+                            '<option>250</option>'+
+                            '<option>500</option>'+
+                            '<option>750</option>'+
+                            '<option>1000</option>'+
+                            '<option selected>'+dataLoadMmrByRank+'</option>';
                         htmlSelectTopCharactersPopularityByMmr =
-                        '<option>25</option>'+
-                        '<option>50</option>'+
-                        '<option>100</option>'+
-                        '<option>250</option>'+
-                        '<option>500</option>'+
-                        '<option>750</option>'+
-                        '<option>1000</option>'+
-                        '<option>1500</option>'+
-                        '<option>2000</option>'+
-                        '<option selected>2500</option>';
+                            '<option>25</option>'+
+                            '<option>50</option>'+
+                            '<option>100</option>'+
+                            '<option>250</option>'+
+                            '<option>500</option>'+
+                            '<option>750</option>'+
+                            '<option>1000</option>'+
+                            '<option>1500</option>'+
+                            '<option>2000</option>'+
+                            '<option selected>2500</option>';
                     }
                     $('#selectMmrByRank').html(htmlSelectMmrByRank);
                     $('#selectTopCharactersPopularityByMmr').html(htmlSelectTopCharactersPopularityByMmr);
@@ -228,24 +228,24 @@ function viewsDataCharactersPopularity(data) {
         $('#title-pie-2v2').html($('#title-pie-2v2').html()+'<span class="txt-normal"> ('+numberWithSpaces(data.charactersList[0].globalTotalPlayers2v2)+' players)</span>');
     }
     let htmlCharactersPopularity = '<div class="row justify-content-center">'+
-    '<p class="text-light txt-big text-center" id="title-pie-1v1">1v1</p>'+
-    '<div class="col"><canvas id="canvasCharacterPopularity1v1" class="w-100"></canvas></div>'+
-    '<div class="col"><table id="datatable1v1" class="bg-dark table-striped text-light text-center">'+
-    '<thead><tr><th></th>'+
-    '<th class="json-txt-name"></th>'+
-    '<th class="text-end json-txt-nbPlayer"></th>'+
-    '<th class="text-end json-txt-percentagePlayer"></th>'+
-    '</tr></thead></table></div></div>'+
-    '<div class="row mt-3">'+
-    '<p class="text-light txt-big text-center" id="title-pie-2v2">2v2</p>'+
-    '<div class="col"><canvas id="canvasCharacterPopularity2v2" class="w-100"></canvas></div>'+
-    '<div class="col"><table id="datatable2v2" class="bg-dark table-striped text-light text-center">'+
-    '<thead><tr><th></th>'+
-    '<th class="json-txt-name"></th>'+
-    '<th class="text-end json-txt-nbPlayer"></th>'+
-    '<th class="text-end json-txt-percentagePlayer"></th>'+
-    '</tr></thead></table></div>'+
-    '</div>';
+        '<p class="text-light txt-big text-center" id="title-pie-1v1">1v1</p>'+
+        '<div class="col"><canvas id="canvasCharacterPopularity1v1" class="w-100"></canvas></div>'+
+        '<div class="col"><table id="datatable1v1" class="bg-dark table-striped text-light text-center">'+
+        '<thead><tr><th></th>'+
+        '<th class="json-txt-name"></th>'+
+        '<th class="text-end json-txt-nbPlayer"></th>'+
+        '<th class="text-end json-txt-percentagePlayer"></th>'+
+        '</tr></thead></table></div></div>'+
+        '<div class="row mt-3">'+
+        '<p class="text-light txt-big text-center" id="title-pie-2v2">2v2</p>'+
+        '<div class="col"><canvas id="canvasCharacterPopularity2v2" class="w-100"></canvas></div>'+
+        '<div class="col"><table id="datatable2v2" class="bg-dark table-striped text-light text-center">'+
+        '<thead><tr><th></th>'+
+        '<th class="json-txt-name"></th>'+
+        '<th class="text-end json-txt-nbPlayer"></th>'+
+        '<th class="text-end json-txt-percentagePlayer"></th>'+
+        '</tr></thead></table></div>'+
+        '</div>';
     $('#charactersPopularity').html(htmlCharactersPopularity);
     getTextMoredataByLang(userLang);
 
@@ -399,8 +399,8 @@ function viewsDataCharactersPopularity(data) {
 
 function viewsDataMmrByRank(data, nbData) {
     let htmlCanvasMmrByRank = '<canvas id="canvasCharacterRank1v1" class="w-100 border border-secondary p-2"></canvas>' +
-    '<div class="text-center"><button class="btn btn-outline-secondary text-light my-3 json-txt-btnZoom" id="no-zoom-btn"></button></div>' +
-    '<canvas id="canvasCharacterRank2v2" class="w-100 border border-secondary p-2"></canvas>';
+        '<div class="text-center"><button class="btn btn-outline-secondary text-light my-3 json-txt-btnZoom" id="no-zoom-btn"></button></div>' +
+        '<canvas id="canvasCharacterRank2v2" class="w-100 border border-secondary p-2"></canvas>';
     $('#MmrByRank').html(htmlCanvasMmrByRank);
     getTextMoredataByLang(userLang);
 
@@ -638,7 +638,7 @@ function viewsDataTopCharactersPopularityByMmr (data, dataMmr, nbData) {
     }
 
     let htmlCanvasTopCharactersPopularityByMmr = '<canvas id="canvasTopCharactersPopularityByMmr1v1" class="w-100 border border-secondary p-2 mb-3"></canvas>'+
-    '<canvas id="canvasTopCharactersPopularityByMmr2v2" class="w-100 border border-secondary p-2"></canvas>';
+        '<canvas id="canvasTopCharactersPopularityByMmr2v2" class="w-100 border border-secondary p-2"></canvas>';
     $('#topCharactersPopularityByMmr').html(htmlCanvasTopCharactersPopularityByMmr);
 
     var bgColor1v1 = [];
