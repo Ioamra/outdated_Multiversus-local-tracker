@@ -1,4 +1,4 @@
-const { connectApi, deepFind, toZeroIfNotExist, getDuration, nameCharacter, nameMap } = require("./functions");
+const { connectApi, deepFind, getDuration, nameCharacter, nameMap } = require("./functions");
 const { Client } = require('multiversus.js');
 
 const dataMatchs = async (name) => {  

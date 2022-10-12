@@ -1,4 +1,4 @@
-const { connectApi, deepFind, toZeroIfNotExist, getAllCharacters, getDuration, nameCharacter, nameMap } = require("./functions");
+const { connectApi, getAllCharacters } = require("./functions");
 const { Client } = require('multiversus.js');
 const fs = require('fs');
 

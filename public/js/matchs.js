@@ -348,7 +348,7 @@ dataGameOne =   '<div class="row text-center text-light mb-2 pt-4">'+
             let dateGame = new Date(yearGame, monthGame, dayGame, hoursGame, minutesGame);
             dataDate = getTimeBetween(dateGame, dateActu, userLang);
             if (data[i].result == "win") {
-                dataGames += '<tr class="border border-dark degrade-win">';   //   </tr>
+                dataGames += '<tr class="border border-dark degrade-win">';
             } else if (data[i].result == "lose") {
                 dataGames += '<tr class="border border-dark degrade-lose">';
             }
@@ -424,7 +424,7 @@ function veiwsMoreInfoMatchs(data) {
                 dataDate = getTimeBetween(dateGame, dateActu, userLang);
 
                 if (data[i].result == "win") {
-                    dataGames += '<tr class="border border-dark degrade-win">';   //   </tr>
+                    dataGames += '<tr class="border border-dark degrade-win">';
                 } else if (data[i].result == "lose") {
                     dataGames += '<tr class="border border-dark degrade-lose">';
                 }
@@ -450,7 +450,7 @@ function veiwsMoreInfoMatchs(data) {
                 dataDate = getTimeBetween(dateGame, dateActu, userLang);
 
                 if (data[i].result == "win") {
-                    dataGames += '<tr class="border border-dark degrade-win">';   //   </tr>
+                    dataGames += '<tr class="border border-dark degrade-win">';
                 } else if (data[i].result == "lose") {
                     dataGames += '<tr class="border border-dark degrade-lose">';
                 }   
