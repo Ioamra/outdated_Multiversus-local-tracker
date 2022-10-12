@@ -1,0 +1,24 @@
+{
+    "en": {
+        "name": "Name",
+        "nbPlayer": "Numbers of players",
+        "percentagePlayer": "% of players",
+        "btnZoom": "Reset zoom",
+        "btnCharactersPopularity": "Show the popularity of characters",
+        "btnMmrByRank": "Show for each characters the top",
+        "btnAddData": "Add data",
+        "btnResetData": "Deleted stored data",
+        "btnTopCharactersPopularityByMmr": "Show character popularity for MMR above top"
+    },
+    "fr": {
+        "name": "Nom",
+        "nbPlayer": "Nombre de joueurs",
+        "percentagePlayer": "% de joueurs",
+        "btnZoom": "Réinitialiser le zoom",
+        "btnCharactersPopularity": "Afficher la popularité des personnages",
+        "btnMmrByRank": "Afficher pour chaque personnages le top",
+        "btnAddData": "Ajouter des données",
+        "btnResetData": "Supprimé les données stockées",
+        "btnTopCharactersPopularityByMmr": "Afficher la popularité des personnages pour un MMR supérieur au top"
+    }
+}

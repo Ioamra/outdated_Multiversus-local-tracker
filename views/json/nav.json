@@ -1,0 +1,12 @@
+{
+    "en": {
+        "home": "Home",
+        "leaderboard": "Leaderboards",
+        "moreData": "More data"
+    },
+    "fr": {
+        "home": "Acceuil",
+        "leaderboard": "Classements",
+        "moreData": "More data"
+    }
+}

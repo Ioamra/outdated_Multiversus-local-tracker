@@ -1,0 +1,10 @@
+{
+    "en": {
+        "notExist": "This profile doesn't exist.",
+        "notSpecificEnough": "The research isn't specific enough."
+    },
+    "fr": {
+        "notExist": "Ce profil n'existe pas.",
+        "notSpecificEnough": "La recherche n'est pas assez précise."
+    }
+}

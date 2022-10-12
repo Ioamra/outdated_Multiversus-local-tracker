@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="/js/DataTables/datatables.min.css"/>
+    <script type="text/javascript" src="/js/DataTables/datatables.min.js"></script>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.2.0/chartjs-plugin-zoom.min.js"></script>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/functions.js"></script>
+    <script src="/js/moredata.js"></script>
+    <style>
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 0 !important;
+        }
+    </style>
+</head>
+<body>
+    <ul class="nav w-50 mx-auto bg-dark txt-big navbar-border-radius justify-content-center align-items-center">
+        <li class="nav-item">
+            <a class="nav-link" href="http://localhost:3000/index.html"><img src="/img/favicon.ico"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light json-txt-home" href="http://localhost:3000/index.html"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light json-txt-leaderboard" href="http://localhost:3000/leaderboard.html"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light json-txt-moreData" href="http://localhost:3000/moredata.html"></a>
+        </li>
+    </ul>
+
+    <div class="d-flex align-items-center"><button class="btn btn-outline-secondary text-light mx-auto my-3 json-txt-btnResetData" onclick="resetSave();location.reload();"></button></div>
+
+    <div id="loader-charactersPopularity" class="text-center" style="display: none;"><img class="mx-auto" src="img/spinner.gif"></div>
+    <div id="charactersPopularity" class="w-100 px-4 px-xxl-5 mb-3">
+        <div class="d-flex align-items-center">
+            <button class="btn btn-outline-secondary text-light mx-auto json-txt-btnCharactersPopularity" onclick="getCharactersPopularity();"></button>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center mb-3">
+        <img class="ms-auto me-2 spinner-save-data" style="display: none;" src="img/spinner.gif">
+        <button id="btnSaveDataMmrByRank" class="btn btn-outline-secondary text-light mx-auto json-txt-btnAddData" onclick="save('DataMmrByRank');"></button>
+        <img class="me-auto ms-2 spinner-save-data" style="display: none;" src="img/spinner.gif">
+    </div>
+
+    <div class="d-flex align-items-center">
+        <button class="btn btn-outline-secondary text-light ms-auto json-txt-btnMmrByRank" onclick="getMmrByRank($('#selectMmrByRank').find(':selected').val());"></button>
+        <select id="selectMmrByRank" class="form-select text-center me-auto" style="width:6em;"></select>
+    </div>
+    <div id="loader-MmrByRank" class="text-center" style="display: none;"><img class="mx-auto" src="img/spinner.gif"></div>
+    <div id="MmrByRank" class="w-100 px-4 px-xxl-5 mt-5 mb-4"></div>
+
+    <div class="d-flex align-items-center">
+        <button class="btn btn-outline-secondary text-light ms-auto json-txt-btnTopCharactersPopularityByMmr" onclick="getTopCharactersPopularityByMmr($('#selectTopCharactersPopularityByMmr').find(':selected').val());"></button>
+        <select id="selectTopCharactersPopularityByMmr" class="form-select text-center me-auto" style="width:6em;"></select>
+    </div>
+    <div id="loader-topCharactersPopularityByMmr" class="text-center" style="display: none;"><img class="mx-auto" src="img/spinner.gif"></div>
+    <div id="topCharactersPopularityByMmr" class="w-100 px-4 px-xxl-5 mt-5 mb-4"></div>
+</body>
+</html>

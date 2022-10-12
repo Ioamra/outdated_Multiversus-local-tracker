@@ -1,0 +1,38 @@
+{
+    "en": {
+        "map": "Map",
+        "duration": "Duration",
+        "me": "Me",
+        "ally": "Ally",
+        "enemy": "Enemy",
+        "damage": "Damages",
+        "kill": "Kill",
+        "death": "Death",
+        "scooby": "Scooby's Haunted Mansion",
+        "skyArenaPlatforms": "Sky Arena Platforms",
+        "cromulons": "Cromulons",
+        "trophyEdge": "Trophy's E.D.G.E",
+        "trophyEdge2": "Trophy's E.D.G.E 2",
+        "skyArena": "Sky Arena",
+        "treeFort": "Tree Fort",
+        "batcave": "Batcave"
+    },
+    "fr": {
+        "map": "Carte",
+        "duration": "Durée",
+        "me": "Moi",
+        "ally": "Allié",
+        "enemy": "Ennemi",
+        "damage": "Dégats",
+        "kill": "Kill",
+        "death": "Death",
+        "scooby": "Manoir hanté de Scooby",
+        "skyArenaPlatforms": "Platforme d'Arène céleste",
+        "cromulons": "Cromulons",
+        "trophyEdge": "S.A.L.L.E des trophées",
+        "trophyEdge2": "S.A.L.L.E des trophées n°2",
+        "skyArena": "Arène céleste",
+        "treeFort": "Arbre-Maison",
+        "batcave": "Batcave"
+    }
+}

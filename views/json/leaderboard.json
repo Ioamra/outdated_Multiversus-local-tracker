@@ -1,0 +1,16 @@
+{
+    "en": {
+        "win": "Wins",
+        "rank": "Rank",
+        "pseudo": "Pseudo",
+        "nbMatch": "Number of Matches",
+        "win-lose": "Wins - Loses"
+    },
+    "fr": {
+        "win": "Victoires",
+        "rank": "Rang",
+        "pseudo": "Pseudo",
+        "nbMatch": "Nombre de Matchs",
+        "win-lose": "Victoires - Défaites"
+    }
+}

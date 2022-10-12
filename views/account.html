@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="/js/DataTables/datatables.min.css"/>
+    <script type="text/javascript" src="/js/DataTables/datatables.min.js"></script>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/functions.js"></script>
+    <script src="/js/account.js"></script>
+</head>
+<body>
+    <ul class="nav w-50 mx-auto bg-dark txt-big navbar-border-radius justify-content-center align-items-center">
+        <li class="nav-item">
+            <a class="nav-link" href="http://localhost:3000/index.html"><img src="/img/favicon.ico"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light json-txt-home" href="http://localhost:3000/index.html"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light json-txt-leaderboard" href="http://localhost:3000/leaderboard.html"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light json-txt-moreData" href="http://localhost:3000/moredata.html"></a>
+        </li>
+    </ul>
+    
+    <div id="loader" style="display: block;"><img src="img/spinner.gif"></div>
+    <div class="text-center mt-3">
+        <input type="text" name="pseudoInput" id="usernameInput" class="mb-3" onkeyup="search($('#usernameInput').val());" onkeypress="handleKeyPress(event)">
+    </div>
+    <div id="search-box" style="display:none;" class="bg-light mx-auto mb-3">
+        <div id="search-result" class="row row-cols-5 justify-content-center"></div>
+    </div>
+    <div class="container-perso">
+        <div id="card-account" class="ps-2 pt-2 pe-0 pb-0 m-0">
+            <div id="username" class="text-pseudo text-center"></div>
+            <div class="row w-100 mx-auto">
+                <div class="col">
+                    <span class="text-start ms-2">
+                        <div class="text-light txt-big d-inline-block">Stats</div>
+                        <div id="totalMatch" class="txt-normal text-light ms-3 d-inline-block"></div>
+                        <div class="txt-normal grey ms-1 d-inline-block json-txt-game"></div>
+                        <div id="win" class="txt-normal green ms-3 d-inline-block"></div><div class="txt-normal green ms-1 d-inline-block json-txt-win"></div>
+                        <div id="lose" class="txt-normal red ms-3 d-inline-block"></div><div class="txt-normal red ms-1 d-inline-block json-txt-lose"></div>
+                    </span>
+                    <div class="row">
+                        <div class="col-auto">
+                            <canvas id="cercleStat1"></canvas>
+                        </div>
+                        <div class="col-auto">
+                            <div id="avatar"></div>
+                        </div>
+                        <div class="col">
+                            <table class="table text-light margin-stat-global text-center">
+                                <tbody>
+                                    <tr>
+                                        <td><p class="text-case json-txt-level"></p><div id="level" class="txt-normal"></div></td>
+                                        <td><p class="text-case json-txt-dodge"></p><div id="attackDodged" class="txt-normal"></div></td>
+                                        <td><p class="text-case json-txt-damage"></p><div id="damageDone" class="txt-normal"></div></td>
+                                        <td><p class="text-case json-txt-ringoutLeader"></p><div id="ringOutLeader" class="txt-normal"></div></td>
+                                        <td><p class="text-case json-txt-creationDate"></p><div id="dateCrea" class="txt-normal"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p class="text-case json-txt-damageRecord"></p><div id="highestDamageDealt" class="txt-normal"></div></td>
+                                        <td><p class="text-case json-txt-assist"></p><div id="assists" class="txt-normal"></div></td>
+                                        <td><p class="text-case json-txt-ringout"></p><div id="ringOuts" class="txt-normal"></div></td>
+                                        <td><p class="text-case json-txt-doubleRingout"></p><div id="doubleRingOuts" class="txt-normal"></div></td>
+                                        <td><p class="text-case json-txt-maxedCharacter"></p><div id="totalMaxedCharacters" class="txt-normal"></div></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+        <div class="row w-100 mx-auto">
+            <div id="card1v1" class="col ps-2 pt-2 pe-0 pb-0 m-3 me-2">
+                <div class="row">
+                    <div class="col text-light">
+                        <span class="text-start ms-2 txt-big">
+                            1 vs 1
+                            <div id="totalMatch1" class="txt-normal d-inline-block ms-5"></div>
+                            <div class="txt-normal grey d-inline-block ms-1 json-txt-game"></div>
+                            <div id="win1" class="txt-normal green d-inline-block ms-3"></div><div class="txt-normal green d-inline-block ms-1 json-txt-win"></div>
+                            <div id="lose1" class="txt-normal red d-inline-block ms-3"></div><div class="txt-normal red d-inline-block ms-1 json-txt-lose"></div>
+                        </span>
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <canvas id="cercleStat2"></canvas>
+                            </div>
+                            <div class="col">
+                                <div class="text-center">
+                                    <div class="my-3">
+                                        <div class="txt-small d-inline-block red">MMR</div>
+                                        <div id="score1" class="txt-small d-inline-block red ms-1"></div>
+                                        <div class="txt-small grey d-inline-block ms-1 json-txt-rank"></div>
+                                        <div id="rank1" class="txt-small text-light d-inline-block ms-1"></div>
+                                        <div id="top1" class="txt-small d-inline-block orange ms-1"></div>
+                                    </div>
+                                    <p class="text-case json-txt-totalPlayer"></p><div class="txt-normal" id="totalPlayers1"></div>
+                                    <p class="text-case json-txt-longestWinStreak"></p><div class="txt-normal" id="longestWinStreak1"></div>
+                                    <p class="text-case json-txt-winStreak"></p><div class="txt-normal" id="winStreak1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+            </div>
+            <div id="card2v2" class="col ps-2 pt-2 pe-0 pb-0 m-3 ms-2">
+                <div class="row">
+                    <div class="col text-light">
+                        <span class="text-start ms-2 txt-big">
+                            2 vs 2
+                            <div id="totalMatch2" class="txt-normal d-inline-block ms-5"></div>
+                            <div class="txt-normal grey d-inline-block ms-1 json-txt-game"></div>
+                            <div id="win2" class="txt-normal green d-inline-block ms-3"></div><div class="txt-normal green d-inline-block ms-1 json-txt-win"></div>
+                            <div id="lose2" class="txt-normal red d-inline-block ms-3"></div><div class="txt-normal red d-inline-block ms-1 json-txt-lose"></div>
+                        </span>
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <canvas id="cercleStat3"></canvas>
+                            </div>
+                            <div class="col">
+                                <div class="text-center">
+                                    <div class="my-3">
+                                        <div class="txt-small d-inline-block red">MMR</div>
+                                        <div id="score2" class="txt-small d-inline-block red ms-1"></div>
+                                        <div class="txt-small grey d-inline-block ms-1 json-txt-rank"></div>
+                                        <div id="rank2" class="txt-small text-light d-inline-block ms-1"></div>
+                                        <div id="top2" class="txt-small d-inline-block orange ms-1"></div>
+                                    </div>
+                                    <p class="text-case json-txt-totalPlayer"></p><div class="txt-normal" id="totalPlayers2"></div>
+                                    <p class="text-case json-txt-longestWinStreak"></p><div class="txt-normal" id="longestWinStreak2"></div>
+                                    <p class="text-case json-txt-winStreak"></p><div class="txt-normal" id="winStreak2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+            </div>
+        </div>
+        <table id="datatable" class="table table-striped text-light text-center">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="json-txt-fighter"></th>
+                    <th class="json-txt-level"></th>
+                    <th class="json-txt-streak"></th>
+                    <th class="json-txt-win"></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="json-txt-1v1rank"></th>
+                    <th>1v1 MMR</th>
+                    <th>1v1 Top</th>
+                    <th class="json-txt-2v2rank"></th>
+                    <th>2v2 MMR</th>
+                    <th>2v2 Top</th>
+                </tr>
+            </thead>
+        </table>
+        <table id="match" class="table table-striped text-center">
+            <tbody id="match-table-body">
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button id="btnMoreMatchs" class="btn btn-outline-dark my-3 text-light json-txt-seeMoreMatch"></button>
+        </div>
+    </div>
+</body>
+</html>

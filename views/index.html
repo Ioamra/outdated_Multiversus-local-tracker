@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="/js/DataTables/datatables.min.css"/>
+    <script type="text/javascript" src="/js/DataTables/datatables.min.js"></script>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/functions.js"></script>
+    <script src="/js/main.js"></script>
+</head>
+<body>
+    <ul class="nav w-50 mx-auto bg-dark txt-big navbar-border-radius justify-content-center align-items-center">
+        <li class="nav-item">
+            <a class="nav-link" href="http://localhost:3000/index.html"><img src="/img/favicon.ico"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light json-txt-home" href="http://localhost:3000/index.html"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light json-txt-leaderboard" href="http://localhost:3000/leaderboard.html"></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light json-txt-moreData" href="http://localhost:3000/moredata.html"></a>
+        </li>
+    </ul>
+    <div class="text-center mt-3">
+        <input type="text" name="pseudoInput" id="usernameInput" class="mb-3" onkeyup="search($('#usernameInput').val());" onkeypress="handleKeyPress(event)">
+    </div>
+    <div id="search-box" style="display:none;" class="bg-light mx-auto mb-3">
+        <div id="search-result" class="row row-cols-5 justify-content-center"></div>
+    </div>
+</body>
+</html>
