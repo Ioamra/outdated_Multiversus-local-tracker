@@ -25,14 +25,14 @@ function getTimeBetween(start, end, lang) {
             return Math.round(diffInTime / oneDay) + " day ago";
         }
         if (diffInTime >= oneHours) {
-            if (diffInTime > 1.5 * oneHours) {
+            if (diffInTime >= 1.5 * oneHours) {
                 return (
                     Math.round(diffInTime / oneHours) + " hours ago"
                 );
             }
             return Math.round(diffInTime / oneHours) + " hour ago";
         }
-        if (diffInTime > 1.5 * oneMinute) {
+        if (diffInTime >= 1.5 * oneMinute) {
             return Math.round(diffInTime / oneMinute) + " minutes ago";
         }
         return Math.round(diffInTime / oneMinute) + " minute ago";
@@ -50,14 +50,14 @@ function getTimeBetween(start, end, lang) {
             return "Il y a " + Math.round(diffInTime / oneDay) + " jour";
         }
         if (diffInTime >= oneHours) {
-            if (diffInTime > 1.5 * oneHours) {
+            if (diffInTime >= 1.5 * oneHours) {
                 return (
                     "Il y a " + Math.round(diffInTime / oneHours) + " heures"
                 );
             }
             return "Il y a " + Math.round(diffInTime / oneHours) + " heure";
         }
-        if (diffInTime > 1.5 * oneMinute) {
+        if (diffInTime >= 1.5 * oneMinute) {
             return "Il y a " + Math.round(diffInTime / oneMinute) + " minutes";
         }
         return "Il y a " + Math.round(diffInTime / oneMinute) + " minute";
@@ -75,14 +75,14 @@ function getTimeBetween(start, end, lang) {
             return Math.round(diffInTime / oneDay) + " day ago";
         }
         if (diffInTime >= oneHours) {
-            if (diffInTime > 1.5 * oneHours) {
+            if (diffInTime >= 1.5 * oneHours) {
                 return (
                     Math.round(diffInTime / oneHours) + " hours ago"
                 );
             }
             return Math.round(diffInTime / oneHours) + " hour ago";
         }
-        if (diffInTime > 1.5 * oneMinute) {
+        if (diffInTime >= 1.5 * oneMinute) {
             return Math.round(diffInTime / oneMinute) + " minutes ago";
         }
         return Math.round(diffInTime / oneMinute) + " minute ago";
