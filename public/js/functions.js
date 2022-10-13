@@ -27,10 +27,10 @@ function getTimeBetween(start, end, lang) {
         if (diffInTime >= oneHours) {
             if (diffInTime > 1.5 * oneHours) {
                 return (
-                    "Il y a " + Math.round(diffInTime / oneHours) + " hours ago"
+                    Math.round(diffInTime / oneHours) + " hours ago"
                 );
             }
-            return "Il y a " + Math.round(diffInTime / oneHours) + " hour ago";
+            return Math.round(diffInTime / oneHours) + " hour ago";
         }
         if (diffInTime > 1.5 * oneMinute) {
             return Math.round(diffInTime / oneMinute) + " minutes ago";
@@ -77,10 +77,10 @@ function getTimeBetween(start, end, lang) {
         if (diffInTime >= oneHours) {
             if (diffInTime > 1.5 * oneHours) {
                 return (
-                    "Il y a " + Math.round(diffInTime / oneHours) + " hours ago"
+                    Math.round(diffInTime / oneHours) + " hours ago"
                 );
             }
-            return "Il y a " + Math.round(diffInTime / oneHours) + " hour ago";
+            return Math.round(diffInTime / oneHours) + " hour ago";
         }
         if (diffInTime > 1.5 * oneMinute) {
             return Math.round(diffInTime / oneMinute) + " minutes ago";
