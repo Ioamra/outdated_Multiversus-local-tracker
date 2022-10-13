@@ -96,6 +96,7 @@ function getAllCharacters() {
         {'fullName':'character_C020', 'name':'rick'},
         {'fullName':'character_shaggy', 'name':'shaggy'},
         {'fullName':'character_steven', 'name':'steven'},
+        {'fullName':'character_C023B', 'name':'stripe'},
         {'fullName':'character_superman', 'name':'superman'},
         {'fullName':'character_taz', 'name':'taz'},
         {'fullName':'character_C017', 'name':'the_iron_giant'},
@@ -140,6 +141,8 @@ function nameCharacter(name) {
         name = 'gizmo';
     } else if (name == 'C020') {
         name = 'rick';
+    } else if (name == 'C023B') {
+        name = 'stripe';
     }
     return name;
 }

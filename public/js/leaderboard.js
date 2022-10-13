@@ -55,8 +55,8 @@ function veiwsCharacterList(charactersList) {
     let htmlCharactersList = "";
     for (let i = 0; i < charactersList.length; i++) {
         htmlCharactersList +=
-            '<div class="col p-1"><a href="leaderboard.html?character=' + charactersList[i].fullName +
-            '"><img style="height:5em; width:auto;" src="/img/perso/' + charactersList[i].name + '.jpg" /></a></div>"';
+            '<div class="col m-1"><a href="leaderboard.html?character=' + charactersList[i].fullName +
+            '"><img style="height:5em; width:auto;" src="/img/perso/' + charactersList[i].name + '.jpg" /></a></div>';
     }
     $("#charactersList").html(htmlCharactersList);
 }

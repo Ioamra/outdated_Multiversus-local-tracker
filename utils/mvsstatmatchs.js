@@ -108,30 +108,24 @@ const dataMatchs = async (name) => {
 
                 if (first) {
                     const myProfiles = await client.profiles.fetch(gameData.server_data.PlayerData[myId].AccountId);
-                    var allCharactersPlayedMe = myProfiles.server_data.stat_trackers.character_wins;
                     first = false;
                     let objTmpMe = {};
                     let objTmpEnemy = {};
-                    for (let key in allCharactersPlayedMe) {
-                        if (deepFind(myProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages') != undefined && nameCharacter(key.slice(10,999)) == nameCharacter((gameData.server_data.PlayerData[myId].CharacterSlug).slice(10,999))) {
-                            objTmpMe.perks1 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[0];
-                            objTmpMe.perks2 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[1];
-                            objTmpMe.perks3 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[2];
-                            objTmpMe.perks4 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[3];
-                            me.perks = objTmpMe;
-                        }
+                    if (deepFind(myProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[myId].CharacterSlug + '.PerkPages') != undefined) {
+                        objTmpMe.perks1 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[myId].CharacterSlug + '.PerkPages')[0].PerkSlugs[0];
+                        objTmpMe.perks2 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[myId].CharacterSlug + '.PerkPages')[0].PerkSlugs[1];
+                        objTmpMe.perks3 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[myId].CharacterSlug + '.PerkPages')[0].PerkSlugs[2];
+                        objTmpMe.perks4 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[myId].CharacterSlug + '.PerkPages')[0].PerkSlugs[3];
+                        me.perks = objTmpMe;
                     }
                     if (gameData.server_data.PlayerData[enemyId].AccountId.slice(0,3).toLowerCase() != 'bot') {
                         const enemyProfiles = await client.profiles.fetch(gameData.server_data.PlayerData[enemyId].AccountId);
-                        var allCharactersPlayedEnemy = enemyProfiles.server_data.stat_trackers.character_wins;
-                        for (let key in allCharactersPlayedEnemy) {
-                            if (deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages') != undefined && nameCharacter(key.slice(10,999)) == nameCharacter((gameData.server_data.PlayerData[enemyId].CharacterSlug).slice(10,999))) {
-                                objTmpEnemy.perks1 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[0];
-                                objTmpEnemy.perks2 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[1];
-                                objTmpEnemy.perks3 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[2];
-                                objTmpEnemy.perks4 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[3];
-                                enemy.perks = objTmpEnemy;
-                            }
+                        if (deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId].CharacterSlug + '.PerkPages') != undefined) {
+                            objTmpEnemy.perks1 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[0];
+                            objTmpEnemy.perks2 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[1];
+                            objTmpEnemy.perks3 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[2];
+                            objTmpEnemy.perks4 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[3];
+                            enemy.perks = objTmpEnemy;
                         }
                     }
                 }
@@ -383,58 +377,46 @@ const dataMatchs = async (name) => {
                     
                     if (first) {
                         const myProfiles = await client.profiles.fetch(gameData.server_data.PlayerData[myId].AccountId);
-                        var allCharactersPlayedMe = myProfiles.server_data.stat_trackers.character_wins;
                         first = false;
                         let objTmpMe = {};
                         let objTmpAlly = {};
                         let objTmpEnemy = {};
                         let objTmpEnemy2 = {};
-                        for (let key in allCharactersPlayedMe) {
-                            if (deepFind(myProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages') != undefined && nameCharacter(key.slice(10,999)) == nameCharacter((gameData.server_data.PlayerData[myId].CharacterSlug).slice(10,999))) {
-                                objTmpMe.perks1 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[0];
-                                objTmpMe.perks2 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[1];
-                                objTmpMe.perks3 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[2];
-                                objTmpMe.perks4 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[3];
-                                me.perks = objTmpMe;
-                            }
+                        if (deepFind(myProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[myId].CharacterSlug + '.PerkPages') != undefined) {
+                            objTmpMe.perks1 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[myId].CharacterSlug + '.PerkPages')[0].PerkSlugs[0];
+                            objTmpMe.perks2 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[myId].CharacterSlug + '.PerkPages')[0].PerkSlugs[1];
+                            objTmpMe.perks3 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[myId].CharacterSlug + '.PerkPages')[0].PerkSlugs[2];
+                            objTmpMe.perks4 = deepFind(myProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[myId].CharacterSlug + '.PerkPages')[0].PerkSlugs[3];
+                            me.perks = objTmpMe;
                         }
                         if (gameData.server_data.PlayerData[allyId].AccountId.slice(0,3).toLowerCase() != 'bot') {
                             const allyProfiles = await client.profiles.fetch(gameData.server_data.PlayerData[allyId].AccountId);
-                            var allCharactersPlayedAlly = allyProfiles.server_data.stat_trackers.character_wins;
-                            for (let key in allCharactersPlayedAlly) {
-                                if (deepFind(allyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages') != undefined && nameCharacter(key.slice(10,999)) == nameCharacter((gameData.server_data.PlayerData[allyId].CharacterSlug).slice(10,999))) {
-                                    objTmpAlly.perks1 = deepFind(allyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[0];
-                                    objTmpAlly.perks2 = deepFind(allyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[1];
-                                    objTmpAlly.perks3 = deepFind(allyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[2];
-                                    objTmpAlly.perks4 = deepFind(allyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[3];
-                                    ally.perks = objTmpAlly;
-                                }
+                            if (deepFind(allyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[allyId].CharacterSlug + '.PerkPages') != undefined) {
+                                objTmpAlly.perks1 = deepFind(allyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[allyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[0];
+                                objTmpAlly.perks2 = deepFind(allyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[allyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[1];
+                                objTmpAlly.perks3 = deepFind(allyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[allyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[2];
+                                objTmpAlly.perks4 = deepFind(allyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[allyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[3];
+                                ally.perks = objTmpAlly;
                             }
                         }
                         if (gameData.server_data.PlayerData[enemyId].AccountId.slice(0,3).toLowerCase() != 'bot') {
                             const enemyProfiles = await client.profiles.fetch(gameData.server_data.PlayerData[enemyId].AccountId);
-                            var allCharactersPlayedEnemy = enemyProfiles.server_data.stat_trackers.character_wins;
-                            for (let key in allCharactersPlayedEnemy) {
-                                if (deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages') != undefined && nameCharacter(key.slice(10,999)) == nameCharacter((gameData.server_data.PlayerData[enemyId].CharacterSlug).slice(10,999))) {
-                                    objTmpEnemy.perks1 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[0];
-                                    objTmpEnemy.perks2 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[1];
-                                    objTmpEnemy.perks3 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[2];
-                                    objTmpEnemy.perks4 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[3];
-                                    enemy.perks = objTmpEnemy;
-                                }
+                            if (deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId].CharacterSlug + '.PerkPages') != undefined) {
+                                objTmpEnemy.perks1 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[0];
+                                objTmpEnemy.perks2 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[1];
+                                objTmpEnemy.perks3 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[2];
+                                objTmpEnemy.perks4 = deepFind(enemyProfiles, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId].CharacterSlug + '.PerkPages')[0].PerkSlugs[3];
+                                enemy.perks = objTmpEnemy;
                             }
                         }
                         if (gameData.server_data.PlayerData[enemyId2].AccountId.slice(0,3).toLowerCase() != 'bot') {
                             const enemyProfiles2 = await client.profiles.fetch(gameData.server_data.PlayerData[enemyId2].AccountId);
-                            var allCharactersPlayedEnemy2 = enemyProfiles2.server_data.stat_trackers.character_wins;
-                            for (let key in allCharactersPlayedEnemy2) {
-                                if (deepFind(enemyProfiles2, 'data.PerkPreferences.Characters.' + key + '.PerkPages') != undefined && nameCharacter(key.slice(10,999)) == nameCharacter((gameData.server_data.PlayerData[enemyId2].CharacterSlug).slice(10,999))) {
-                                    objTmpEnemy2.perks1 = deepFind(enemyProfiles2, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[0];
-                                    objTmpEnemy2.perks2 = deepFind(enemyProfiles2, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[1];
-                                    objTmpEnemy2.perks3 = deepFind(enemyProfiles2, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[2];
-                                    objTmpEnemy2.perks4 = deepFind(enemyProfiles2, 'data.PerkPreferences.Characters.' + key + '.PerkPages')[0].PerkSlugs[3];
-                                    enemy2.perks = objTmpEnemy2;
-                                }
+                            if (deepFind(enemyProfiles2, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId2].CharacterSlug + '.PerkPages') != undefined) {
+                                objTmpEnemy2.perks1 = deepFind(enemyProfiles2, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId2].CharacterSlug + '.PerkPages')[0].PerkSlugs[0];
+                                objTmpEnemy2.perks2 = deepFind(enemyProfiles2, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId2].CharacterSlug + '.PerkPages')[0].PerkSlugs[1];
+                                objTmpEnemy2.perks3 = deepFind(enemyProfiles2, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId2].CharacterSlug + '.PerkPages')[0].PerkSlugs[2];
+                                objTmpEnemy2.perks4 = deepFind(enemyProfiles2, 'data.PerkPreferences.Characters.' + gameData.server_data.PlayerData[enemyId2].CharacterSlug + '.PerkPages')[0].PerkSlugs[3];
+                                enemy2.perks = objTmpEnemy2;
                             }
                         }
                     }
