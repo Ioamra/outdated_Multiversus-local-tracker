@@ -25,4 +25,4 @@ node .
 ## How use
 
 - Run the cmd file to start the app
-- go to http://localhost:3000/ on your browser
+- Go to http://localhost:3000/ on your browser
