@@ -386,7 +386,7 @@ async function viewsInfoAccount(data) {
             $("#loader").css("display", "none");
             $("#datatable td img").parents("td").addClass("p-img-datatable");
             $("#datatable td .noPerks").parents("td").addClass("p-img-datatable");
-            $("datatable").attr("style", "width: 100%;");
+            $("#datatable").attr("style", "width: auto;");
         },
     });
 }
