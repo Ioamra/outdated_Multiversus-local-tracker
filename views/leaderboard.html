@@ -26,7 +26,7 @@
             <a class="nav-link text-light json-txt-home" href="http://localhost:3000/index.html"></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-light json-txt-leaderboard" href="http://localhost:3000/leaderboard.html"></a>
+            <a class="nav-link grey disabled json-txt-leaderboard" href="http://localhost:3000/leaderboard.html"></a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-light json-txt-moreData" href="http://localhost:3000/moredata.html"></a>
@@ -35,7 +35,7 @@
 
     <div id="loader" style="display: block;"><img src="img/spinner.gif"></div>
     <div class="text-center mt-3">
-        <input type="text" name="pseudoInput" id="usernameInput" class="mb-3" onkeyup="search($('#usernameInput').val());" onkeypress="handleKeyPress(event)">
+        <input type="text" name="pseudoInput" id="usernameInput" class="mb-3 p-1" placeholder="Pseudo WB" onkeyup="search($('#usernameInput').val());" onkeypress="handleKeyPress(event)">
     </div>
     <div id="search-box" style="display:none;" class="bg-light mx-auto mb-3">
         <div id="search-result" class="row row-cols-5 justify-content-center"></div>

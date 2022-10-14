@@ -20,10 +20,10 @@
 <body>
     <ul class="nav w-50 mx-auto bg-dark txt-big navbar-border-radius justify-content-center align-items-center">
         <li class="nav-item">
-            <a class="nav-link" href="http://localhost:3000/index.html"><img src="/img/favicon.ico"></a>
+            <a class="nav-link disabled" href="http://localhost:3000/index.html"><img src="/img/favicon.ico"></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-light json-txt-home" href="http://localhost:3000/index.html"></a>
+            <a class="nav-link grey disabled json-txt-home" href="http://localhost:3000/index.html"></a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-light json-txt-leaderboard" href="http://localhost:3000/leaderboard.html"></a>
@@ -33,7 +33,7 @@
         </li>
     </ul>
     <div class="text-center mt-3">
-        <input type="text" name="pseudoInput" id="usernameInput" class="mb-3" onkeyup="search($('#usernameInput').val());" onkeypress="handleKeyPress(event)">
+        <input type="text" name="pseudoInput" id="usernameInput" class="mb-3 p-1" placeholder="Pseudo WB" onkeyup="search($('#usernameInput').val());" onkeypress="handleKeyPress(event)">
     </div>
     <div id="search-box" style="display:none;" class="bg-light mx-auto mb-3">
         <div id="search-result" class="row row-cols-5 justify-content-center"></div>
