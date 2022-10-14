@@ -147,44 +147,48 @@ function getCharactersPopularity() {
 }
 
 function getMmrByRank(nbDataCharacterRank) {
-    $('#loader-MmrByRank').css('display', 'block');
-    $('#MmrByRank').html("");
-    fetch('mvsstatmoredata?method=loadSave')
-    .then(res => res.json())
-    .then(data => {
-        if (data.error) {
-            alert(data.error);
-        } else {
-            console.log(data);
-            viewsDataMmrByRank(data, nbDataCharacterRank);
-            $('#loader-MmrByRank').css('display', 'none');
-        }
-    });
+    if (nbDataCharacterRank) {
+        $('#loader-MmrByRank').css('display', 'block');
+        $('#MmrByRank').html("");
+        fetch('mvsstatmoredata?method=loadSave')
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                console.log(data);
+                viewsDataMmrByRank(data, nbDataCharacterRank);
+                $('#loader-MmrByRank').css('display', 'none');
+            }
+        });
+    }
 }
  
 function getTopCharactersPopularityByMmr(nbDataTopCharactersPopularityByMmr) {
-    $('#loader-topCharactersPopularityByMmr').css('display', 'block');
-    $('#topCharactersPopularityByMmr').html("");
-    fetch('mvsstatmoredata?method=loadSave')
-    .then(res => res.json())
-    .then(data => {
-        if (data.error) {
-            alert(data.error);
-        } else {
-            console.log(data);
-            fetch('mvsstatmoredata?method=getMmrTop&numTop='+nbDataTopCharactersPopularityByMmr)
-            .then(res2 => res2.json())
-            .then(dataMmr => {
-                if (dataMmr.error) {
-                    alert(dataMmr.error);
+    if (nbDataTopCharactersPopularityByMmr) {
+        $('#loader-topCharactersPopularityByMmr').css('display', 'block');
+        $('#topCharactersPopularityByMmr').html("");
+        fetch('mvsstatmoredata?method=loadSave')
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
                 } else {
-                    console.log(dataMmr);
-                    viewsDataTopCharactersPopularityByMmr(data, dataMmr, nbDataTopCharactersPopularityByMmr);
-                    $('#loader-topCharactersPopularityByMmr').css('display', 'none');
-                }
-            });
-        }
-    });
+                    console.log(data);
+                    fetch('mvsstatmoredata?method=getMmrTop&numTop='+nbDataTopCharactersPopularityByMmr)
+                    .then(res2 => res2.json())
+                    .then(dataMmr => {
+                        if (dataMmr.error) {
+                        alert(dataMmr.error);
+                    } else {
+                        console.log(dataMmr);
+                        viewsDataTopCharactersPopularityByMmr(data, dataMmr, nbDataTopCharactersPopularityByMmr);
+                        $('#loader-topCharactersPopularityByMmr').css('display', 'none');
+                    }
+                });
+            }
+        });
+    }
 }
 
 function save(data) { //* save('DataMmrByRank')
@@ -446,14 +450,14 @@ function viewsDataMmrByRank(data, nbData) {
     var textTitle1v1 = '';
     var textTitle2v2 = '';
     if (userLang == 'en') {
-        textTitle1v1 = 'Top ' + nbData + ' 1v1 for each characters';
-        textTitle2v2 = 'Top ' + nbData + ' 2v2 for each characters';
+        textTitle1v1 = 'Top ' + nbData + ' 1v1 for each character';
+        textTitle2v2 = 'Top ' + nbData + ' 2v2 for each character';
     } else if (userLang == 'fr') {
-        textTitle1v1 = 'Top ' + nbData + ' 1v1 pour chaque personnages';
-        textTitle2v2 = 'Top ' + nbData + ' 2v2 pour chaque personnages';
+        textTitle1v1 = 'Top ' + nbData + ' 1v1 pour chaque personnage';
+        textTitle2v2 = 'Top ' + nbData + ' 2v2 pour chaque personnage';
     } else {
-        textTitle1v1 = 'Top ' + nbData + ' 1v1 for each characters';
-        textTitle2v2 = 'Top ' + nbData + ' 2v2 for each characters';
+        textTitle1v1 = 'Top ' + nbData + ' 1v1 for each character';
+        textTitle2v2 = 'Top ' + nbData + ' 2v2 for each character';
     }
 
     const ctxCharacterRank1v1 = document.getElementById('canvasCharacterRank1v1').getContext('2d');
