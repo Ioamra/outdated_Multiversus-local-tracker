@@ -26,3 +26,9 @@ node .
 
 - Run the cmd file to start the app
 - Go to http://localhost:3000/ on your browser
+
+If your account don't have steam guard but you have this message on your cmd:
+```txt
+Steam Guard App Code:
+```
+It's because this is the first connection of this account on this computer, you can enter the code received on the email associated with your account.
