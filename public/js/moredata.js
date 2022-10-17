@@ -414,6 +414,11 @@ function viewsDataMmrByRank(data, nbData) {
     let color = [];
     let mmr1v1 = [];
     let mmr2v2 = [];
+    
+    dataLoadMmrByRank = 0;
+    for (let val in data.charactersList[0].leaderboard1v1) {
+        dataLoadMmrByRank += 1;
+    }
 
     for (let i = 0; i < data.charactersList.length; i++) {
         labels.push(data.charactersList[i].name.replace('_', ' ').replace('_', ' '));
