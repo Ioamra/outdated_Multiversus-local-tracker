@@ -216,7 +216,7 @@ function resetSave() {
         .then(res => res.json())
         .then(data => {
             alert(data.res);
-            showSelect();
+            location.reload();
     });
 }
 
@@ -414,7 +414,7 @@ function viewsDataMmrByRank(data, nbData) {
     let color = [];
     let mmr1v1 = [];
     let mmr2v2 = [];
-    
+
     dataLoadMmrByRank = 0;
     for (let val in data.charactersList[0].leaderboard1v1) {
         dataLoadMmrByRank += 1;
