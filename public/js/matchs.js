@@ -388,7 +388,7 @@ function veiwsInfoMatchs(data) {
                     notIsNaN(Math.round(data[i].me.preMmr * 100) / 100) + "</p> " +
                     formateMmrDiff(mmrDiffMe) +
                     "</td>" +
-                    "<td></td>" +
+                    "<td>VS</td>" +
                     '<td style="width:5em;">' +
                     '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
                 if (isBot(data[i].enemy.username)) {
@@ -440,7 +440,7 @@ function veiwsInfoMatchs(data) {
                     '.jpg"></a><p class="text-light p-0 m-0">' + notIsNaN(Math.round(data[i].ally.preMmr * 100) / 100) + "</p> " +
                     formateMmrDiff(mmrDiffAlly) +
                     "</td>" +
-                    "<td></td>" +
+                    "<td>VS</td>" +
                     '<td style="width:5em;">' +
                     '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
                 if (isBot(data[i].enemy.username)) {
@@ -523,7 +523,7 @@ function veiwsMoreInfoMatchs(data) {
                     "</p> " +
                     formateMmrDiff(mmrDiffMe) +
                     "</td>" +
-                    "<td></td>" +
+                    "<td>VS</td>" +
                     '<td style="width:5em;">' +
                     '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
                 if (isBot(data[i].enemy.username)) {
@@ -581,7 +581,7 @@ function veiwsMoreInfoMatchs(data) {
                     '<img style="max-height:5em; width:auto;" src="/img/perso/' + data[i].ally.character + '.jpg"></a><p class="text-light p-0 m-0">' + notIsNaN(Math.round(data[i].ally.preMmr * 100) / 100) + "</p> " +
                     formateMmrDiff(mmrDiffAlly) +
                     "</td>" +
-                    "<td></td>" +
+                    "<td>VS</td>" +
                     '<td style="width:5em;">' +
                     '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
                 if (isBot(data[i].enemy.username)) {
