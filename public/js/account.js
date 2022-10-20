@@ -77,8 +77,10 @@ async function viewsInfoAccount(data) {
     }
 
     $("#avatar").html('<img id="img-profil" src="/img/profil/' + data.globals.avatar + '.jpg">');
-    if (data.matches[Object.keys(data.matches)[0]].me) {
-        $("#card-account").css("background-image", "url(/img/perso/" + data.matches[Object.keys(data.matches)[0]].me.character + "-lg.png)");
+    if (data.matches[Object.keys(data.matches)[0]]) {
+        if (data.matches[Object.keys(data.matches)[0]].me) {
+            $("#card-account").css("background-image", "url(/img/perso/" + data.matches[Object.keys(data.matches)[0]].me.character + "-lg.png)");
+        }
     }
     $("#username").text(data.globals.username);
     $("#level").text(data.globals.level);
