@@ -2,6 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const GETname = urlParams.get("name");
 var userLang = navigator.language || navigator.userLanguage;
 userLang = userLang.slice(0, 2);
+var countWin1 = 0, countLose1 = 0, countWin2 = 0, countLose2 = 0;
 
 $(function () {
     $("title").html("Multiversus - Account - " + GETname);
@@ -397,6 +398,7 @@ function veiwsInfoMatchs(data) {
     let dataGames = "";
     for (let i = 0; i < 25; i++) {
         if (data[i]) {
+            console.log(data[i]);
             let date = new Date().toISOString();
             let yearActu = Number(date.slice(0, 4));
             let monthActu = Number(date.slice(5, 7));
@@ -415,8 +417,10 @@ function veiwsInfoMatchs(data) {
 
             if (data[i].mode == "1v1") {
                 if (data[i].result == "win") {
+                    countWin1 += 1;
                     dataGames += '<tr class="border border-dark degrade-win">';
                 } else if (data[i].result == "lose") {
+                    countLose1 += 1;
                     dataGames += '<tr class="border border-dark degrade-lose">';
                 }
                 mmrDiffMe = Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
@@ -457,8 +461,10 @@ function veiwsInfoMatchs(data) {
 
             if (data[i].mode == "2v2") {
                 if (data[i].result == "win") {
+                    countWin2 += 1;
                     dataGames += '<tr class="border border-dark degrade-win">';
                 } else if (data[i].result == "lose") {
+                    countLose2 += 1;
                     dataGames += '<tr class="border border-dark degrade-lose">';
                 }
                 mmrDiffMe = Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
@@ -527,8 +533,27 @@ function veiwsInfoMatchs(data) {
             }
         }
     }
+    loadWinRate('All');
     $("#match-table-body").html(dataGames);
     getTextAccountByLang(userLang);
+}
+
+function loadWinRate(type) {
+    if (type == "All" || type == "Tous") {
+        $('#countWin').html(countWin1 + countWin2 + 'W');
+        $('#countLose').html(countLose1 + countLose2 + 'L');
+        $('#winRate').html('(' + Math.round((countWin1 + countWin2) / (countWin1 + countWin2 + countLose1 + countLose2) * 100) + '%)');
+    }
+    if (type == "1v1") {
+        $('#countWin').html(countWin1 + 'W');
+        $('#countLose').html(countLose1 + 'L');
+        $('#winRate').html('(' + Math.round(countWin1 / (countWin1 + countLose1) * 100) + '%)');
+    }
+    if (type == "2v2") {
+        $('#countWin').html(countWin2 + 'W');
+        $('#countLose').html(countLose2 + 'L');
+        $('#winRate').html('(' + Math.round(countWin2 / (countWin2 + countLose2) * 100) + '%)');
+    }
 }
 
 function viewsSearchResult(data) {

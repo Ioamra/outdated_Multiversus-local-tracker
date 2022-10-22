@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const GETname = urlParams.get("name");
 var userLang = navigator.language || navigator.userLanguage;
 userLang = userLang.slice(0, 2);
-var page = 1;
+var page = 1, countWin1 = 0, countLose1 = 0, countWin2 = 0, countLose2 = 0;
 
 $(function () {
     $("title").html("Multiversus - Matchs - " + GETname);
@@ -129,6 +129,11 @@ function veiwsInfoMatchs(data) {
                 $("#gameOne").addClass("border border-dark degrade-top-lose");
             }
             if (data[i].mode == "1v1") {
+                if (data[i].result == "win") {
+                    countWin1 += 1;
+                } else if (data[i].result == "lose") {
+                    countLose1 += 1;
+                }
                 mmrDiffMe = Math.round((Math.round(data[i].me.postMmr * 100) / 100 - Math.round(data[i].me.preMmr * 100) / 100) * 100) / 100;
                 mmrDiffEnemy = Math.round((Math.round(data[i].enemy.postMmr * 100) / 100 - Math.round(data[i].enemy.preMmr * 100) / 100) * 100) / 100;
                 dataGameOne =
@@ -207,6 +212,11 @@ function veiwsInfoMatchs(data) {
                     "</div>";
             }
             if (data[i].mode == "2v2") {
+                if (data[i].result == "win") {
+                    countWin2 += 1;
+                } else if (data[i].result == "lose") {
+                    countLose2 += 1;
+                }
                 mmrDiffMe = Math.round((Math.round(data[i].me.postMmr * 100) / 100 - Math.round(data[i].me.preMmr * 100) / 100) * 100 ) / 100;
                 mmrDiffAlly = Math.round((Math.round(data[i].ally.postMmr * 100) / 100 - Math.round(data[i].ally.preMmr * 100) / 100) * 100 ) / 100;
                 mmrDiffEnemy = Math.round((Math.round(data[i].enemy.postMmr * 100) / 100 - Math.round(data[i].enemy.preMmr * 100) / 100) * 100 ) / 100;
@@ -377,6 +387,11 @@ function veiwsInfoMatchs(data) {
                 dataGames += '<tr class="border border-dark degrade-lose">';
             }
             if (data[i].mode == "1v1") {
+                if (data[i].result == "win") {
+                    countWin1 += 1;
+                } else if (data[i].result == "lose") {
+                    countLose1 += 1;
+                }
                 mmrDiffMe = Math.round((Math.round(data[i].me.postMmr * 100) / 100 - Math.round(data[i].me.preMmr * 100) / 100) * 100) / 100;
                 mmrDiffEnemy = Math.round((Math.round(data[i].enemy.postMmr * 100) / 100 - Math.round(data[i].enemy.preMmr * 100) / 100) * 100) / 100;
 
@@ -411,8 +426,12 @@ function veiwsInfoMatchs(data) {
                     "<td></td>" +
                     "</tr>";
             }
-
             if (data[i].mode == "2v2") {
+                if (data[i].result == "win") {
+                    countWin2 += 1;
+                } else if (data[i].result == "lose") {
+                    countLose2 += 1;
+                }
                 mmrDiffMe = Math.round((Math.round(data[i].me.postMmr * 100) / 100 - Math.round(data[i].me.preMmr * 100) / 100) * 100) / 100;
                 mmrDiffAlly = Math.round((Math.round(data[i].ally.postMmr * 100) / 100 - Math.round(data[i].ally.preMmr * 100) / 100) * 100) / 100;
                 mmrDiffEnemy = Math.round((Math.round(data[i].enemy.postMmr * 100) / 100 - Math.round(data[i].enemy.preMmr * 100) / 100) * 100) / 100;
@@ -479,6 +498,7 @@ function veiwsInfoMatchs(data) {
             }
         }
     }
+    loadWinRate('All');
     $("#match-table-body").html(dataGames);
     getTextMatchsByLang(userLang);
 }
@@ -507,9 +527,11 @@ function veiwsMoreInfoMatchs(data) {
                 dataDate = getTimeBetween(dateGame, dateActu, userLang);
 
                 if (data[i].result == "win") {
-                  dataGames += '<tr class="border border-dark degrade-win">';
+                    countWin1 += 1;
+                    dataGames += '<tr class="border border-dark degrade-win">';
                 } else if (data[i].result == "lose") {
-                  dataGames += '<tr class="border border-dark degrade-lose">';
+                    countLose1 += 1;
+                    dataGames += '<tr class="border border-dark degrade-lose">';
                 }
                 mmrDiffMe = Math.round((Math.round(data[i].me.postMmr * 100) / 100 - Math.round(data[i].me.preMmr * 100) / 100) * 100) / 100;
                 mmrDiffEnemy = Math.round((Math.round(data[i].enemy.postMmr * 100) / 100 - Math.round(data[i].enemy.preMmr * 100) / 100) * 100) / 100;
@@ -550,11 +572,13 @@ function veiwsMoreInfoMatchs(data) {
 
             if (data[i].mode == "2v2") {
                 dataDate = getTimeBetween(dateGame, dateActu, userLang);
-
+                
                 if (data[i].result == "win") {
-                  dataGames += '<tr class="border border-dark degrade-win">';
+                    countWin2 += 1;
+                    dataGames += '<tr class="border border-dark degrade-win">';
                 } else if (data[i].result == "lose") {
-                  dataGames += '<tr class="border border-dark degrade-lose">';
+                    countLose2 += 1;
+                    dataGames += '<tr class="border border-dark degrade-lose">';
                 }
                 mmrDiffMe = Math.round((Math.round(data[i].me.postMmr * 100) / 100 - Math.round(data[i].me.preMmr * 100) / 100) * 100) / 100;
                 mmrDiffAlly = Math.round((Math.round(data[i].ally.postMmr * 100) / 100 - Math.round(data[i].ally.preMmr * 100) / 100) * 100) / 100;
@@ -620,8 +644,27 @@ function veiwsMoreInfoMatchs(data) {
             }
         }
     }
+    loadWinRate($('#selectWinRate').val());
     $("#match-table-body").html($("#match-table-body").html() + dataGames);
     getTextMatchsByLang(userLang);
+}
+
+function loadWinRate(type) {
+    if (type == "All" || type == "Tous") {
+        $('#countWin').html(countWin1 + countWin2 + 'W');
+        $('#countLose').html(countLose1 + countLose2 + 'L');
+        $('#winRate').html('(' + Math.round((countWin1 + countWin2) / (countWin1 + countWin2 + countLose1 + countLose2) * 100) + '%)');
+    }
+    if (type == "1v1") {
+        $('#countWin').html(countWin1 + 'W');
+        $('#countLose').html(countLose1 + 'L');
+        $('#winRate').html('(' + Math.round(countWin1 / (countWin1 + countLose1) * 100) + '%)');
+    }
+    if (type == "2v2") {
+        $('#countWin').html(countWin2 + 'W');
+        $('#countLose').html(countLose2 + 'L');
+        $('#winRate').html('(' + Math.round(countWin2 / (countWin2 + countLose2) * 100) + '%)');
+    }
 }
 
 function viewsSearchResult(data) {

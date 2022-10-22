@@ -15,7 +15,8 @@
         "trophyEdge2": "Trophy's E.D.G.E 2",
         "skyArena": "Sky Arena",
         "treeFort": "Tree Fort",
-        "batcave": "Batcave"
+        "batcave": "Batcave",
+        "all": "All"
     },
     "fr": {
         "map": "Carte",
@@ -33,6 +34,7 @@
         "trophyEdge2": "S.A.L.L.E des trophées n°2",
         "skyArena": "Arène céleste",
         "treeFort": "Arbre-Maison",
-        "batcave": "Batcave"
+        "batcave": "Batcave",
+        "all": "Tous"
     }
 }

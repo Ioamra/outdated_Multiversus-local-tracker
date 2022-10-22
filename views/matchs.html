@@ -39,7 +39,20 @@
     </div>
     <div id="search-box" style="display:none;" class="bg-light mx-auto mb-3">
         <div id="search-result" class="row row-cols-5 justify-content-center"></div>
-    </div>        
+    </div>
+    <div class="container d-flex justify-content-end text-light">
+        <select id="selectWinRate" class="form-select d-inline-flex text-center border border-dark my-2 w-auto" onchange="loadWinRate($('#selectWinRate').val());">
+            <option class="json-txt-all"></option>
+            <option>1v1</option>
+            <option>2v2</option>
+        </select>
+        <div class="d-inline-flex text-center p-2 my-2">
+            <div id="countWin" class="green px-1"></div>
+            -
+            <div id="countLose" class="red px-1"></div>
+            <div id="winRate" class="px-1"></div>
+        </div>
+    </div>
     <div id="gameOne" class="mx-5 mx-xxl-7"></div>
     <div class="container-perso text-center">
         <table id="match" class="table table-striped">
