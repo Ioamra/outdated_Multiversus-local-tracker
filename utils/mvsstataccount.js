@@ -43,7 +43,9 @@ const dataAccount = async (name) => {
     globals.avatar  = accountsData.server_data.ProfileIcon.Slug;
     globals.username = accountsData.identity.alternate.wb_network[0].username;
     globals.level = accountsData.server_data.Level;
-
+    if (accountsData.identity.alternate.twitch) {
+        globals.nameTwitch = accountsData.identity.alternate.twitch[0].username
+    }
     if (profilesData["1v1"] && profilesData["2v2"]) {
         globals.totalMatch = toZeroIfNotExist(profilesData["1v1"].loss) + toZeroIfNotExist(profilesData["1v1"].win) + toZeroIfNotExist(profilesData["2v2"].loss) + toZeroIfNotExist(profilesData["2v2"].win);
         globals.win = toZeroIfNotExist(profilesData["1v1"].win) + toZeroIfNotExist(profilesData["2v2"].win);

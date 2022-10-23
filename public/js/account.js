@@ -83,7 +83,12 @@ async function viewsInfoAccount(data) {
             $("#card-account").css("background-image", "url(/img/perso/" + data.matches[Object.keys(data.matches)[0]].me.character + "-lg.png)");
         }
     }
-    $("#username").text(data.globals.username);
+    $("#username").html(data.globals.username);
+    if (data.globals.nameTwitch) {
+        $("#username").html(data.globals.username +
+            '<a href="https://www.twitch.tv/' + data.globals.nameTwitch +
+            '"><img class="d-inline-block ms-2" style="height:1em; width:auto;" src="/img/icon-twitch.png" /></a>');
+    }
     $("#level").text(data.globals.level);
     $("#totalMatch").text(numberWithSpaces(data.globals.totalMatch));
     $("#percentageWin").text(Math.round(data.globals.percentageWin * 1000) / 1000 + " %");
@@ -398,7 +403,6 @@ function veiwsInfoMatchs(data) {
     let dataGames = "";
     for (let i = 0; i < 25; i++) {
         if (data[i]) {
-            console.log(data[i]);
             let date = new Date().toISOString();
             let yearActu = Number(date.slice(0, 4));
             let monthActu = Number(date.slice(5, 7));
