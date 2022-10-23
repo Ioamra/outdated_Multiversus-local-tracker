@@ -111,6 +111,21 @@ function formateMmrDiff(mmrDiff) {
     }
 }
 
+function formateCountMmrDiff(mmrDiff) {
+    let mmrDiffFormated;
+    if (isNaN(mmrDiff)) {
+        return "";
+    } else {
+        mmrDiff = Math.round(mmrDiff * 100) / 100;
+        if (String(mmrDiff).slice(0, 1) == "-") {
+            mmrDiffFormated = '<p class="m-0 red"> - ' + String(mmrDiff).slice(1, 6) + "MMR</p>";
+        } else {
+            mmrDiffFormated = '<p class="m-0 green"> + ' + mmrDiff + "MMR</p>";
+        }
+        return mmrDiffFormated;
+    }
+}
+
 function isBot(username) {
     if (username == "BOT") {
         return true;

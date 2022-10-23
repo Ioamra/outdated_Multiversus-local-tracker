@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const GETname = urlParams.get("name");
 var userLang = navigator.language || navigator.userLanguage;
 userLang = userLang.slice(0, 2);
-var countWin1 = 0, countLose1 = 0, countWin2 = 0, countLose2 = 0;
+var charactersHisto = [];
 
 $(function () {
     $("title").html("Multiversus - Account - " + GETname);
@@ -418,146 +418,264 @@ function veiwsInfoMatchs(data) {
             let minutesGame = Number(data[i].completion_time.slice(14, 16));
             let dateGame = new Date(yearGame, monthGame, dayGame, hoursGame, minutesGame);
             dataDate = getTimeBetween(dateGame, dateActu, userLang);
-
-            if (data[i].mode == "1v1") {
-                if (data[i].result == "win") {
-                    countWin1 += 1;
-                    dataGames += '<tr class="border border-dark degrade-win">';
-                } else if (data[i].result == "lose") {
-                    countLose1 += 1;
-                    dataGames += '<tr class="border border-dark degrade-lose">';
-                }
-                mmrDiffMe = Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
-                mmrDiffEnemy = Math.round((data[i].enemy.postMmr - data[i].enemy.preMmr) * 100) / 100;
-                dataGames += '<td style="width:5em;">' + dataDate + "</td>";
-                dataGames +=
-                    '<td style="width:5em;"></td>' +
-                    '<td style="width:5em;"><a class="btn m-0 p-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="' + data[i].me.username + '" href="account.html?name=' + data[i].me.username +
-                    '"><img style="max-height:5em; width:auto;" src="/img/perso/' + data[i].me.character + '.jpg"></a><p class="text-light p-0 m-0">' +
-                    notIsNaN(Math.round(data[i].me.preMmr * 100) / 100) +
-                    "</p> " +
-                    formateMmrDiff(mmrDiffMe) +
-                    "</td>" +
-                    "<td>VS</td>" +
-                    '<td style="width:5em;">' +
-                    '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
-                if (isBot(data[i].enemy.username)) {
-                    dataGames += 'title="BOT"';
+            dataGames += createLine(data[i]);
+            if (data[i].mode == "1v1" || data[i].mode == "2v2") {
+                if (charactersHisto.find(o => o.character == data[i].me.character)) {
+                    if (data[i].mode == "1v1") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                if (data[i].me.postMmr) {
+                                    charactersHisto[y].mmrDiff1 = x.mmrDiff1 + Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
+                                }
+                            };
+                        });
+                    }
+                    if (data[i].mode == "2v2") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                if (data[i].me.postMmr) {
+                                    charactersHisto[y].mmrDiff2 = x.mmrDiff2 + Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
+                                }
+                            }
+                        });
+                    }
                 } else {
-                    dataGames += 'title="' + data[i].enemy.username + '" href="account.html?name=' + data[i].enemy.username + '"';
+                    if (data[i].mode == '1v1') {
+                        if (data[i].me.postMmr) {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100,
+                                    "mmrDiff2": 0
+                                }
+                            );
+                        } else {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": 0,
+                                    "mmrDiff2": 0
+                                }
+                            );
+                        }
+                    }
+                    if (data[i].mode == '2v2') {
+                        if (data[i].me.postMmr) {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": 0,
+                                    "mmrDiff2": Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100
+                                }
+                            );
+                        } else {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": 0,
+                                    "mmrDiff2": 0
+                                }
+                            );
+                        }
+                    }
                 }
-                dataGames +=
-                    ">" +
-                    '<img style="max-height:5em; width:auto;" src="/img/perso/' + data[i].enemy.character + '.jpg"></a><p class="text-light p-0 m-0">' +
-                    notIsNaN(Math.round(data[i].enemy.preMmr * 100) / 100) +
-                    "</p> " +
-                    formateMmrDiff(mmrDiffEnemy) +
-                    "</td>" +
-                    '<td style="width:5em;"></td>' +
-                    '<td><p class="grey json-txt-map"></p><p class="json-txt-' + data[i].mapName + '"></p></td>' +
-                    '<td><p class="grey json-txt-duration"></p>' + data[i].duration + "</td>" +
-                    '<td><p class="grey json-txt-me"></p>' + data[i].me.damageDone + "<p>" + data[i].me.ringOuts + " - " + data[i].me.deaths + "</p></td>" +
-                    "<td></td>" +
-                    '<td><p class="grey json-txt-enemy"></p>' + data[i].enemy.damageDone + "<p>" + data[i].enemy.ringOuts + " - " + data[i].enemy.deaths + "</p></td>" +
-                    "<td></td>" +
-                    "</tr>";
-            }
-
-            if (data[i].mode == "2v2") {
-                if (data[i].result == "win") {
-                    countWin2 += 1;
-                    dataGames += '<tr class="border border-dark degrade-win">';
-                } else if (data[i].result == "lose") {
-                    countLose2 += 1;
-                    dataGames += '<tr class="border border-dark degrade-lose">';
+                if (data[i].mode == '1v1') {
+                    if (data[i].result == "win") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].win1 = x.win1 + 1;
+                            };
+                        });
+                    }
+                    if (data[i].result == "lose") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].lose1 = x.lose1 + 1;
+                            };
+                        });
+                    }
                 }
-                mmrDiffMe = Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
-                mmrDiffAlly = Math.round((data[i].ally.postMmr - data[i].ally.preMmr) * 100) / 100;
-                mmrDiffEnemy = Math.round((data[i].enemy.postMmr - data[i].enemy.preMmr) * 100) / 100;
-                mmrDiffEnemy2 = Math.round((data[i].enemy2.postMmr - data[i].enemy2.preMmr) * 100) / 100;
-
-                dataGames += '<td style="width:5em;">' + dataDate + "</td>";
-                dataGames +=
-                    '<td style="width:5em;"><a class="btn m-0 p-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="' + data[i].me.username + '" href="account.html?name=' + data[i].me.username +
-                    '"><img style="max-height:5em; width:auto;" src="/img/perso/' + data[i].me.character + '.jpg"></a><p class="text-light p-0 m-0">' +
-                    notIsNaN(Math.round(data[i].me.preMmr * 100) / 100) +
-                    "</p>" +
-                    formateMmrDiff(mmrDiffMe) +
-                    "</td>" +
-                    '<td style="width:5em;">' +
-                    '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
-                if (isBot(data[i].ally.username)) {
-                    dataGames += 'title="BOT"';
-                } else {
-                    dataGames += 'title="' + data[i].ally.username + '" href="account.html?name=' + data[i].ally.username + '"';
+                if (data[i].mode == '2v2') {
+                    if (data[i].result == "win") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].win2 = x.win2 + 1;
+                            };
+                        });
+                    }
+                    if (data[i].result == "lose") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].lose2 = x.lose2 + 1;
+                            };
+                        });
+                    }
                 }
-                dataGames +=
-                    ">" +
-                    '<img style="max-height:5em; width:auto;" src="/img/perso/' + data[i].ally.character + '.jpg"></a><p class="text-light p-0 m-0">' +
-                    notIsNaN(Math.round(data[i].ally.preMmr * 100) / 100) +
-                    "</p>" +
-                    formateMmrDiff(mmrDiffAlly) +
-                    "</td>" +
-                    "<td>VS</td>" +
-                    '<td style="width:5em;">' +
-                    '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
-                if (isBot(data[i].enemy.username)) {
-                    dataGames += 'title="BOT"';
-                } else {
-                    dataGames += 'title="' + data[i].enemy.username + '" href="account.html?name=' + data[i].enemy.username + '"';
-                }
-                dataGames +=
-                    ">" +
-                    '<img style="max-height:5em; width:auto;" src="/img/perso/' + data[i].enemy.character + '.jpg"></a><p class="text-light p-0 m-0">' +
-                    notIsNaN(Math.round(data[i].enemy.preMmr * 100) / 100) +
-                    "</p>" +
-                    formateMmrDiff(mmrDiffEnemy) +
-                    "</td>" +
-                    '<td style="width:5em;">' +
-                    '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
-                if (isBot(data[i].enemy2.username)) {
-                    dataGames += 'title="BOT"';
-                } else {
-                    dataGames += 'title="' + data[i].enemy2.username + '" href="account.html?name=' + data[i].enemy2.username + '"';
-                }
-                dataGames +=
-                    ">" +
-                    '<img style="max-height:5em; width:auto;" src="/img/perso/' + data[i].enemy2.character + '.jpg"></a><p class="text-light p-0 m-0">' +
-                    notIsNaN(Math.round(data[i].enemy2.preMmr * 100) / 100) +
-                    "</p>" +
-                    formateMmrDiff(mmrDiffEnemy2) +
-                    "</td>" +
-                    '<td><p class="grey json-txt-map"></p><p class="json-txt-' + data[i].mapName + '"></p></td>' +
-                    '<td><p class="grey json-txt-duration"></p>' + data[i].duration + "</td>" +
-                    '<td><p class="grey json-txt-me"></p>' + data[i].me.damageDone + "<p>" + data[i].me.ringOuts + " - " + data[i].me.deaths + "</p></td>" +
-                    '<td><p class="grey json-txt-ally"></p>' + data[i].ally.damageDone + "<p>" + data[i].ally.ringOuts + " - " + data[i].ally.deaths + "</p></td>" +
-                    '<td><p class="grey json-txt-enemy"></p>' + data[i].enemy.damageDone + "<p>" + data[i].enemy.ringOuts + " - " + data[i].enemy.deaths + "</p></td>" +
-                    '<td><p class="grey json-txt-enemy"></p>' + data[i].enemy2.damageDone + "<p>" + data[i].enemy2.ringOuts + " - " + data[i].enemy2.deaths + "</p></td>" +
-                    "</tr>";
             }
         }
     }
-    loadWinRate('All');
+    let htmlOptions = '';
+    for (let j = 0; j < charactersHisto.length; j++) {
+        htmlOptions += '<option value="' + charactersHisto[j].character + '">' +
+            charactersHisto[j].character.replace("_", " ").replace("_", " ") +
+            '</option>';
+    }
+    $('#selectCharacter').html('<option class="json-txt-all"></option>' + htmlOptions);
+    loadCharacterMmr('All');
     $("#match-table-body").html(dataGames);
     getTextAccountByLang(userLang);
 }
 
-function loadWinRate(type) {
-    if (type == "All" || type == "Tous") {
-        $('#countWin').html(countWin1 + countWin2 + 'W');
-        $('#countLose').html(countLose1 + countLose2 + 'L');
-        $('#winRate').html('(' + Math.round((countWin1 + countWin2) / (countWin1 + countWin2 + countLose1 + countLose2) * 100) + '%)');
+function createLine(data) {
+    let html = "";
+    if (data.mode == '1v1') {
+        if (data.result == "win") {
+            html += '<tr class="border border-dark degrade-win">';
+        } else if (data.result == "lose") {
+            html += '<tr class="border border-dark degrade-lose">';
+        }
+        mmrDiffMe = Math.round((data.me.postMmr - data.me.preMmr) * 100) / 100;
+        mmrDiffEnemy = Math.round((data.enemy.postMmr - data.enemy.preMmr) * 100) / 100;
+        html += '<td style="width:5em;">' + dataDate + "</td>";
+        html +=
+            '<td style="width:5em;"></td>' +
+            '<td style="width:5em;"><a class="btn m-0 p-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="' + data.me.username + '" href="account.html?name=' + data.me.username +
+            '"><img style="max-height:5em; width:auto;" src="/img/perso/' + data.me.character + '.jpg"></a><p class="text-light p-0 m-0">' +
+            notIsNaN(Math.round(data.me.preMmr * 100) / 100) +
+            "</p> " +
+            formateMmrDiff(mmrDiffMe) +
+            "</td>" +
+            "<td>VS</td>" +
+            '<td style="width:5em;">' +
+            '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
+        if (isBot(data.enemy.username)) {
+            html += 'title="BOT"';
+        } else {
+            html += 'title="' + data.enemy.username + '" href="account.html?name=' + data.enemy.username + '"';
+        }
+        html +=
+            ">" +
+            '<img style="max-height:5em; width:auto;" src="/img/perso/' + data.enemy.character + '.jpg"></a><p class="text-light p-0 m-0">' +
+            notIsNaN(Math.round(data.enemy.preMmr * 100) / 100) +
+            "</p> " +
+            formateMmrDiff(mmrDiffEnemy) +
+            "</td>" +
+            '<td style="width:5em;"></td>' +
+            '<td><p class="grey json-txt-map"></p><p class="json-txt-' + data.mapName + '"></p></td>' +
+            '<td><p class="grey json-txt-duration"></p>' + data.duration + "</td>" +
+            '<td><p class="grey json-txt-me"></p>' + data.me.damageDone + "<p>" + data.me.ringOuts + " - " + data.me.deaths + "</p></td>" +
+            "<td></td>" +
+            '<td><p class="grey json-txt-enemy"></p>' + data.enemy.damageDone + "<p>" + data.enemy.ringOuts + " - " + data.enemy.deaths + "</p></td>" +
+            "<td></td>" +
+            "</tr>";
     }
-    if (type == "1v1") {
-        $('#countWin').html(countWin1 + 'W');
-        $('#countLose').html(countLose1 + 'L');
-        $('#winRate').html('(' + Math.round(countWin1 / (countWin1 + countLose1) * 100) + '%)');
+    if (data.mode == '2v2') {
+        if (data.result == "win") {
+            html += '<tr class="border border-dark degrade-win">';
+        } else if (data.result == "lose") {
+            html += '<tr class="border border-dark degrade-lose">';
+        }
+        mmrDiffMe = Math.round((data.me.postMmr - data.me.preMmr) * 100) / 100;
+        mmrDiffAlly = Math.round((data.ally.postMmr - data.ally.preMmr) * 100) / 100;
+        mmrDiffEnemy = Math.round((data.enemy.postMmr - data.enemy.preMmr) * 100) / 100;
+        mmrDiffEnemy2 = Math.round((data.enemy2.postMmr - data.enemy2.preMmr) * 100) / 100;
+        
+        html += '<td style="width:5em;">' + dataDate + "</td>";
+        html +=
+            '<td style="width:5em;"><a class="btn m-0 p-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="' + data.me.username + '" href="account.html?name=' + data.me.username +
+            '"><img style="max-height:5em; width:auto;" src="/img/perso/' + data.me.character + '.jpg"></a><p class="text-light p-0 m-0">' +
+            notIsNaN(Math.round(data.me.preMmr * 100) / 100) +
+            "</p>" +
+            formateMmrDiff(mmrDiffMe) +
+            "</td>" +
+            '<td style="width:5em;">' +
+            '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
+        if (isBot(data.ally.username)) {
+            html += 'title="BOT"';
+        } else {
+            html += 'title="' + data.ally.username + '" href="account.html?name=' + data.ally.username + '"';
+        }
+        html +=
+            ">" +
+            '<img style="max-height:5em; width:auto;" src="/img/perso/' + data.ally.character + '.jpg"></a><p class="text-light p-0 m-0">' +
+            notIsNaN(Math.round(data.ally.preMmr * 100) / 100) +
+            "</p>" +
+            formateMmrDiff(mmrDiffAlly) +
+            "</td>" +
+            "<td>VS</td>" +
+            '<td style="width:5em;">' +
+            '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
+        if (isBot(data.enemy.username)) {
+            html += 'title="BOT"';
+        } else {
+            html += 'title="' + data.enemy.username + '" href="account.html?name=' + data.enemy.username + '"';
+        }
+        html +=
+            ">" +
+            '<img style="max-height:5em; width:auto;" src="/img/perso/' + data.enemy.character + '.jpg"></a><p class="text-light p-0 m-0">' +
+            notIsNaN(Math.round(data.enemy.preMmr * 100) / 100) +
+            "</p>" +
+            formateMmrDiff(mmrDiffEnemy) +
+            "</td>" +
+            '<td style="width:5em;">' +
+            '<a class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" ';
+        if (isBot(data.enemy2.username)) {
+            html += 'title="BOT"';
+        } else {
+            html += 'title="' + data.enemy2.username + '" href="account.html?name=' + data.enemy2.username + '"';
+        }
+        html +=
+            ">" +
+            '<img style="max-height:5em; width:auto;" src="/img/perso/' + data.enemy2.character + '.jpg"></a><p class="text-light p-0 m-0">' +
+            notIsNaN(Math.round(data.enemy2.preMmr * 100) / 100) +
+            "</p>" +
+            formateMmrDiff(mmrDiffEnemy2) +
+            "</td>" +
+            '<td><p class="grey json-txt-map"></p><p class="json-txt-' + data.mapName + '"></p></td>' +
+            '<td><p class="grey json-txt-duration"></p>' + data.duration + "</td>" +
+            '<td><p class="grey json-txt-me"></p>' + data.me.damageDone + "<p>" + data.me.ringOuts + " - " + data.me.deaths + "</p></td>" +
+            '<td><p class="grey json-txt-ally"></p>' + data.ally.damageDone + "<p>" + data.ally.ringOuts + " - " + data.ally.deaths + "</p></td>" +
+            '<td><p class="grey json-txt-enemy"></p>' + data.enemy.damageDone + "<p>" + data.enemy.ringOuts + " - " + data.enemy.deaths + "</p></td>" +
+            '<td><p class="grey json-txt-enemy"></p>' + data.enemy2.damageDone + "<p>" + data.enemy2.ringOuts + " - " + data.enemy2.deaths + "</p></td>" +
+            "</tr>";
     }
-    if (type == "2v2") {
-        $('#countWin').html(countWin2 + 'W');
-        $('#countLose').html(countLose2 + 'L');
-        $('#winRate').html('(' + Math.round(countWin2 / (countWin2 + countLose2) * 100) + '%)');
+    return html;
+}
+
+function loadCharacterMmr(character) {
+    if (character == "All" ||character == "Tous") {
+        let totalWin1 = 0, totalLose1 = 0, totalWin2 = 0, totalLose2 = 0;
+        for (let i = 0; i < charactersHisto.length; i++) {
+            totalWin1 += charactersHisto[i].win1;
+            totalLose1 += charactersHisto[i].lose1;
+            totalWin2 += charactersHisto[i].win2;
+            totalLose2 += charactersHisto[i].lose2;
+        }
+        $('#count1').html('1v1 => <span class="green px-1">' + totalWin1 + 'W </span>-<span class="red px-1"> ' + totalLose1 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin1 / (totalWin1 + totalLose1) * 100) + '%)</span>');
+        $('#count2').html('2v2 => <span class="green px-1">' + totalWin2 + 'W </span>-<span class="red px-1"> ' + totalLose2 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin2 / (totalWin2 + totalLose2) * 100) + '%)</span>');
     }
+    charactersHisto.find((x, y) => {
+        if (x.character ==  character) {
+            $('#count1').html('1v1 => <span class="green px-1">' + x.win1 + 'W </span>-<span class="red px-1"> ' + x.lose1 + 'L </span><span class="px-1 grey">(' + Math.round(x.win1 / (x.win1 + x.lose1) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff1));
+            $('#count2').html('2v2 => <span class="green px-1">' + x.win2 + 'W </span>-<span class="red px-1"> ' + x.lose2 + 'L </span><span class="px-1 grey">(' + Math.round(x.win2 / (x.win2 + x.lose2) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff2));
+        }
+    });
 }
 
 function viewsSearchResult(data) {

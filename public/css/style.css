@@ -197,6 +197,10 @@ td {
     height: 100%;
 }
 
+#countMmr > * {
+    display: inline-block;
+}
+
 #datatable > thead > tr > th,
 #datatable > tbody > tr > td,
 #datatable1v1 > thead > tr > th,
