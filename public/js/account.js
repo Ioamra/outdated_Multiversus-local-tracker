@@ -659,6 +659,7 @@ function createLine(data) {
 }
 
 function loadCharacterMmr(character) {
+    console.log(charactersHisto);
     if (character == "All" ||character == "Tous") {
         let totalWin1 = 0, totalLose1 = 0, totalWin2 = 0, totalLose2 = 0;
         for (let i = 0; i < charactersHisto.length; i++) {
@@ -667,13 +668,21 @@ function loadCharacterMmr(character) {
             totalWin2 += charactersHisto[i].win2;
             totalLose2 += charactersHisto[i].lose2;
         }
-        $('#count1').html('1v1 => <span class="green px-1">' + totalWin1 + 'W </span>-<span class="red px-1"> ' + totalLose1 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin1 / (totalWin1 + totalLose1) * 100) + '%)</span>');
-        $('#count2').html('2v2 => <span class="green px-1">' + totalWin2 + 'W </span>-<span class="red px-1"> ' + totalLose2 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin2 / (totalWin2 + totalLose2) * 100) + '%)</span>');
+        if ((totalWin1 + totalLose1) != 0) {
+            $('#count1').html('1v1 => <span class="green px-1">' + totalWin1 + 'W </span>-<span class="red px-1"> ' + totalLose1 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin1 / (totalWin1 + totalLose1) * 100) + '%)</span>');
+        }
+        if ((totalWin2 + totalLose2) != 0) {
+            $('#count2').html('2v2 => <span class="green px-1">' + totalWin2 + 'W </span>-<span class="red px-1"> ' + totalLose2 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin2 / (totalWin2 + totalLose2) * 100) + '%)</span>');
+        }
     }
     charactersHisto.find((x, y) => {
         if (x.character ==  character) {
-            $('#count1').html('1v1 => <span class="green px-1">' + x.win1 + 'W </span>-<span class="red px-1"> ' + x.lose1 + 'L </span><span class="px-1 grey">(' + Math.round(x.win1 / (x.win1 + x.lose1) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff1));
-            $('#count2').html('2v2 => <span class="green px-1">' + x.win2 + 'W </span>-<span class="red px-1"> ' + x.lose2 + 'L </span><span class="px-1 grey">(' + Math.round(x.win2 / (x.win2 + x.lose2) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff2));
+            if ((x.win1 + x.lose1) != 0) {
+                $('#count1').html('1v1 => <span class="green px-1">' + x.win1 + 'W </span>-<span class="red px-1"> ' + x.lose1 + 'L </span><span class="px-1 grey">(' + Math.round(x.win1 / (x.win1 + x.lose1) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff1));
+            }
+            if ((x.win2 + x.lose2) != 0) {
+                $('#count2').html('2v2 => <span class="green px-1">' + x.win2 + 'W </span>-<span class="red px-1"> ' + x.lose2 + 'L </span><span class="px-1 grey">(' + Math.round(x.win2 / (x.win2 + x.lose2) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff2));
+            }
         }
     });
 }

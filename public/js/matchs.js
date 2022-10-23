@@ -362,6 +362,115 @@ function veiwsInfoMatchs(data) {
                 dataGameOne += "</div>" + "</div></div></div>";
             }
             $("#gameOne").html(dataGameOne);
+            if (data[i].mode == "1v1" || data[i].mode == "2v2") {
+                if (charactersHisto.find(o => o.character == data[i].me.character)) {
+                    if (data[i].mode == "1v1") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                if (data[i].me.postMmr) {
+                                    charactersHisto[y].mmrDiff1 = x.mmrDiff1 + (Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100);
+                                }
+                            };
+                        });
+                    }
+                    if (data[i].mode == "2v2") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                if (data[i].me.postMmr) {
+                                    charactersHisto[y].mmrDiff2 = x.mmrDiff2 + (Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100);
+                                }
+                            }
+                        });
+                    }
+                } else {
+                    if (data[i].mode == '1v1') {
+                        if (data[i].me.postMmr) {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100,
+                                    "mmrDiff2": 0
+                                }
+                            );
+                        } else {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": 0,
+                                    "mmrDiff2": 0
+                                }
+                            );
+                        }
+                    }
+                    if (data[i].mode == '2v2') {
+                        if (data[i].me.postMmr) {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": 0,
+                                    "mmrDiff2": Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100
+                                }
+                            );
+                        } else {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": 0,
+                                    "mmrDiff2": 0
+                                }
+                            );
+                        }
+                    }
+                }
+                if (data[i].mode == '1v1') {
+                    if (data[i].result == "win") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].win1 = x.win1 + 1;
+                            };
+                        });
+                    }
+                    if (data[i].result == "lose") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].lose1 = x.lose1 + 1;
+                            };
+                        });
+                    }
+                }
+                if (data[i].mode == '2v2') {
+                    if (data[i].result == "win") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].win2 = x.win2 + 1;
+                            };
+                        });
+                    }
+                    if (data[i].result == "lose") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].lose2 = x.lose2 + 1;
+                            };
+                        });
+                    }
+                }
+            }
         } else if (data[i]) {
             let date = new Date().toISOString();
             let yearActu = Number(date.slice(0, 4));
@@ -385,7 +494,7 @@ function veiwsInfoMatchs(data) {
                         charactersHisto.find((x, y) => {
                             if (x.character ==  data[i].me.character) {
                                 if (data[i].me.postMmr) {
-                                    charactersHisto[y].mmrDiff1 = x.mmrDiff1 + Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
+                                    charactersHisto[y].mmrDiff1 = x.mmrDiff1 + (Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100);
                                 }
                             };
                         });
@@ -394,7 +503,7 @@ function veiwsInfoMatchs(data) {
                         charactersHisto.find((x, y) => {
                             if (x.character ==  data[i].me.character) {
                                 if (data[i].me.postMmr) {
-                                    charactersHisto[y].mmrDiff2 = x.mmrDiff2 + Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
+                                    charactersHisto[y].mmrDiff2 = x.mmrDiff2 + (Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100);
                                 }
                             }
                         });
@@ -529,7 +638,7 @@ function veiwsMoreInfoMatchs(data) {
                         charactersHisto.find((x, y) => {
                             if (x.character ==  data[i].me.character) {
                                 if (data[i].me.postMmr) {
-                                    charactersHisto[y].mmrDiff1 = x.mmrDiff1 + Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
+                                    charactersHisto[y].mmrDiff1 = x.mmrDiff1 + (Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100);
                                 }
                             };
                         });
@@ -538,7 +647,7 @@ function veiwsMoreInfoMatchs(data) {
                         charactersHisto.find((x, y) => {
                             if (x.character ==  data[i].me.character) {
                                 if (data[i].me.postMmr) {
-                                    charactersHisto[y].mmrDiff2 = x.mmrDiff2 + Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
+                                    charactersHisto[y].mmrDiff2 = x.mmrDiff2 + (Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100);
                                 }
                             }
                         });
@@ -775,13 +884,21 @@ function loadCharacterMmr(character) {
             totalWin2 += charactersHisto[i].win2;
             totalLose2 += charactersHisto[i].lose2;
         }
-        $('#count1').html('1v1 => <span class="green px-1">' + totalWin1 + 'W </span>-<span class="red px-1"> ' + totalLose1 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin1 / (totalWin1 + totalLose1) * 100) + '%)</span>');
-        $('#count2').html('2v2 => <span class="green px-1">' + totalWin2 + 'W </span>-<span class="red px-1"> ' + totalLose2 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin2 / (totalWin2 + totalLose2) * 100) + '%)</span>');
+        if ((totalWin1 + totalLose1) != 0) {
+            $('#count1').html('1v1 => <span class="green px-1">' + totalWin1 + 'W </span>-<span class="red px-1"> ' + totalLose1 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin1 / (totalWin1 + totalLose1) * 100) + '%)</span>');
+        }
+        if ((totalWin2 + totalLose2) != 0) {
+            $('#count2').html('2v2 => <span class="green px-1">' + totalWin2 + 'W </span>-<span class="red px-1"> ' + totalLose2 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin2 / (totalWin2 + totalLose2) * 100) + '%)</span>');
+        }
     }
     charactersHisto.find((x, y) => {
         if (x.character ==  character) {
-            $('#count1').html('1v1 => <span class="green px-1">' + x.win1 + 'W </span>-<span class="red px-1"> ' + x.lose1 + 'L </span><span class="px-1 grey">(' + Math.round(x.win1 / (x.win1 + x.lose1) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff1));
-            $('#count2').html('2v2 => <span class="green px-1">' + x.win2 + 'W </span>-<span class="red px-1"> ' + x.lose2 + 'L </span><span class="px-1 grey">(' + Math.round(x.win2 / (x.win2 + x.lose2) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff2));
+            if ((x.win1 + x.lose1) != 0) {
+                $('#count1').html('1v1 => <span class="green px-1">' + x.win1 + 'W </span>-<span class="red px-1"> ' + x.lose1 + 'L </span><span class="px-1 grey">(' + Math.round(x.win1 / (x.win1 + x.lose1) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff1));
+            }
+            if ((x.win2 + x.lose2) != 0) {
+                $('#count2').html('2v2 => <span class="green px-1">' + x.win2 + 'W </span>-<span class="red px-1"> ' + x.lose2 + 'L </span><span class="px-1 grey">(' + Math.round(x.win2 / (x.win2 + x.lose2) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff2));
+            }
         }
     });
     console.log(charactersHisto);
