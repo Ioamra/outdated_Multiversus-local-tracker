@@ -379,113 +379,113 @@ function veiwsInfoMatchs(data) {
             let dateGame = new Date(yearGame, monthGame, dayGame, hoursGame, minutesGame);
             dataDate = getTimeBetween(dateGame, dateActu, userLang);
             dataGames += createLine(data[i]);
-        }
-        if (data[i].mode == "1v1" || data[i].mode == "2v2") {
-            if (charactersHisto.find(o => o.character == data[i].me.character)) {
-                if (data[i].mode == "1v1") {
-                    charactersHisto.find((x, y) => {
-                        if (x.character ==  data[i].me.character) {
-                            if (data[i].me.postMmr) {
-                                charactersHisto[y].mmrDiff1 = x.mmrDiff1 + Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
+            if (data[i].mode == "1v1" || data[i].mode == "2v2") {
+                if (charactersHisto.find(o => o.character == data[i].me.character)) {
+                    if (data[i].mode == "1v1") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                if (data[i].me.postMmr) {
+                                    charactersHisto[y].mmrDiff1 = x.mmrDiff1 + Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
+                                }
+                            };
+                        });
+                    }
+                    if (data[i].mode == "2v2") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                if (data[i].me.postMmr) {
+                                    charactersHisto[y].mmrDiff2 = x.mmrDiff2 + Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
+                                }
                             }
-                        };
-                    });
-                }
-                if (data[i].mode == "2v2") {
-                    charactersHisto.find((x, y) => {
-                        if (x.character ==  data[i].me.character) {
-                            if (data[i].me.postMmr) {
-                                charactersHisto[y].mmrDiff2 = x.mmrDiff2 + Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100;
-                            }
+                        });
+                    }
+                } else {
+                    if (data[i].mode == '1v1') {
+                        if (data[i].me.postMmr) {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100,
+                                    "mmrDiff2": 0
+                                }
+                            );
+                        } else {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": 0,
+                                    "mmrDiff2": 0
+                                }
+                            );
                         }
-                    });
+                    }
+                    if (data[i].mode == '2v2') {
+                        if (data[i].me.postMmr) {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": 0,
+                                    "mmrDiff2": Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100
+                                }
+                            );
+                        } else {
+                            charactersHisto.push(
+                                {
+                                    "character": data[i].me.character,
+                                    "win1": 0,
+                                    "lose1": 0,
+                                    "win2": 0,
+                                    "lose2": 0,
+                                    "mmrDiff1": 0,
+                                    "mmrDiff2": 0
+                                }
+                            );
+                        }
+                    }
                 }
-            } else {
                 if (data[i].mode == '1v1') {
-                    if (data[i].me.postMmr) {
-                        charactersHisto.push(
-                            {
-                                "character": data[i].me.character,
-                                "win1": 0,
-                                "lose1": 0,
-                                "win2": 0,
-                                "lose2": 0,
-                                "mmrDiff1": Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100,
-                                "mmrDiff2": 0
-                            }
-                        );
-                    } else {
-                        charactersHisto.push(
-                            {
-                                "character": data[i].me.character,
-                                "win1": 0,
-                                "lose1": 0,
-                                "win2": 0,
-                                "lose2": 0,
-                                "mmrDiff1": 0,
-                                "mmrDiff2": 0
-                            }
-                        );
+                    if (data[i].result == "win") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].win1 = x.win1 + 1;
+                            };
+                        });
+                    }
+                    if (data[i].result == "lose") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].lose1 = x.lose1 + 1;
+                            };
+                        });
                     }
                 }
                 if (data[i].mode == '2v2') {
-                    if (data[i].me.postMmr) {
-                        charactersHisto.push(
-                            {
-                                "character": data[i].me.character,
-                                "win1": 0,
-                                "lose1": 0,
-                                "win2": 0,
-                                "lose2": 0,
-                                "mmrDiff1": 0,
-                                "mmrDiff2": Math.round((data[i].me.postMmr - data[i].me.preMmr) * 100) / 100
-                            }
-                        );
-                    } else {
-                        charactersHisto.push(
-                            {
-                                "character": data[i].me.character,
-                                "win1": 0,
-                                "lose1": 0,
-                                "win2": 0,
-                                "lose2": 0,
-                                "mmrDiff1": 0,
-                                "mmrDiff2": 0
-                            }
-                        );
+                    if (data[i].result == "win") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].win2 = x.win2 + 1;
+                            };
+                        });
                     }
-                }
-            }
-            if (data[i].mode == '1v1') {
-                if (data[i].result == "win") {
-                    charactersHisto.find((x, y) => {
-                        if (x.character ==  data[i].me.character) {
-                            charactersHisto[y].win1 = x.win1 + 1;
-                        };
-                    });
-                }
-                if (data[i].result == "lose") {
-                    charactersHisto.find((x, y) => {
-                        if (x.character ==  data[i].me.character) {
-                            charactersHisto[y].lose1 = x.lose1 + 1;
-                        };
-                    });
-                }
-            }
-            if (data[i].mode == '2v2') {
-                if (data[i].result == "win") {
-                    charactersHisto.find((x, y) => {
-                        if (x.character ==  data[i].me.character) {
-                            charactersHisto[y].win2 = x.win2 + 1;
-                        };
-                    });
-                }
-                if (data[i].result == "lose") {
-                    charactersHisto.find((x, y) => {
-                        if (x.character ==  data[i].me.character) {
-                            charactersHisto[y].lose2 = x.lose2 + 1;
-                        };
-                    });
+                    if (data[i].result == "lose") {
+                        charactersHisto.find((x, y) => {
+                            if (x.character ==  data[i].me.character) {
+                                charactersHisto[y].lose2 = x.lose2 + 1;
+                            };
+                        });
+                    }
                 }
             }
         }
