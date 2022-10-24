@@ -670,18 +670,26 @@ function loadCharacterMmr(character) {
         }
         if ((totalWin1 + totalLose1) != 0) {
             $('#count1').html('1v1 => <span class="green px-1">' + totalWin1 + 'W </span>-<span class="red px-1"> ' + totalLose1 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin1 / (totalWin1 + totalLose1) * 100) + '%)</span>');
+        } else {
+            $('#count1').html('');
         }
         if ((totalWin2 + totalLose2) != 0) {
             $('#count2').html('2v2 => <span class="green px-1">' + totalWin2 + 'W </span>-<span class="red px-1"> ' + totalLose2 + 'L </span><span class="px-1 grey">(' + Math.round(totalWin2 / (totalWin2 + totalLose2) * 100) + '%)</span>');
+        } else {
+            $('#count2').html('');
         }
     }
     charactersHisto.find((x, y) => {
         if (x.character ==  character) {
             if ((x.win1 + x.lose1) != 0) {
                 $('#count1').html('1v1 => <span class="green px-1">' + x.win1 + 'W </span>-<span class="red px-1"> ' + x.lose1 + 'L </span><span class="px-1 grey">(' + Math.round(x.win1 / (x.win1 + x.lose1) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff1));
+            } else {
+                $('#count1').html('');
             }
             if ((x.win2 + x.lose2) != 0) {
                 $('#count2').html('2v2 => <span class="green px-1">' + x.win2 + 'W </span>-<span class="red px-1"> ' + x.lose2 + 'L </span><span class="px-1 grey">(' + Math.round(x.win2 / (x.win2 + x.lose2) * 100) + '%)</span> ' + formateCountMmrDiff(x.mmrDiff2));
+            } else {
+                $('#count2').html('');
             }
         }
     });
