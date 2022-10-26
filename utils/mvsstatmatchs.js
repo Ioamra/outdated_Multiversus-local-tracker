@@ -5,6 +5,11 @@ const dataMatchs = async (name) => {
     const token = await connectApi();
     const client = new Client({ accessToken: token });
     const searchData = await client.profiles.search(name);
+    if (searchData.total == 0) {
+        let res = {};
+        res.error = 'Le profil n\'a pas été trouvé.';
+        return res;
+    }
     var idProfil;
     let idProfilTmp, accountsDataTmp;
     idProfil = searchData.results[0].result.account_id;
