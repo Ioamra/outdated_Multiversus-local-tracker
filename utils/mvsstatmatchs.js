@@ -98,15 +98,33 @@ const dataMatchs = async (name) => {
                 enemy.teamId = gameData.server_data.PlayerData[enemyId].TeamIndex;
                 enemy.teamScore = gameData.server_data.TeamScores[gameData.server_data.PlayerData[enemyId].TeamIndex];
 
+                // * Pre patch Black Adam
                 if (gameData.data.ratingUpdates) {
-                    for (let j = 0; j < (gameData.data.ratingUpdates.playerRatingChanges).length; j++) {
-                        if (idProfil == gameData.data.ratingUpdates.playerRatingChanges[j].playerAccountID) {
-                            me.preMmr = gameData.data.ratingUpdates.playerRatingChanges[j].preMatchRating.mean;
-                            me.postMmr = gameData.data.ratingUpdates.playerRatingChanges[j].postMatchRating.mean;
+                    if (gameData.data.ratingUpdates.playerRatingChanges) {
+                        for (let j = 0; j < (gameData.data.ratingUpdates.playerRatingChanges).length; j++) {
+                            if (idProfil == gameData.data.ratingUpdates.playerRatingChanges[j].playerAccountID) {
+                                me.preMmr = gameData.data.ratingUpdates.playerRatingChanges[j].preMatchRating.mean;
+                                me.postMmr = gameData.data.ratingUpdates.playerRatingChanges[j].postMatchRating.mean;
+                            }
+                            if (enemyAccountId == gameData.data.ratingUpdates.playerRatingChanges[j].playerAccountID) {
+                                enemy.preMmr = gameData.data.ratingUpdates.playerRatingChanges[j].preMatchRating.mean;
+                                enemy.postMmr = gameData.data.ratingUpdates.playerRatingChanges[j].postMatchRating.mean;
+                            }
                         }
-                        if (enemyAccountId == gameData.data.ratingUpdates.playerRatingChanges[j].playerAccountID) {
-                            enemy.preMmr = gameData.data.ratingUpdates.playerRatingChanges[j].preMatchRating.mean;
-                            enemy.postMmr = gameData.data.ratingUpdates.playerRatingChanges[j].postMatchRating.mean;
+                    }
+                }
+                // * Post patch Black Adam
+                if (gameData.data.ratingUpdates) {
+                    if (gameData.data.ratingUpdates.player_rating_changes) {
+                        for (let j = 0; j < (gameData.data.ratingUpdates.player_rating_changes).length; j++) {
+                            if (idProfil == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                                me.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                                me.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
+                            }
+                            if (enemyAccountId == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                                enemy.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                                enemy.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
+                            }
                         }
                     }
                 }
@@ -359,6 +377,8 @@ const dataMatchs = async (name) => {
                     enemy2.teamId = gameData.server_data.PlayerData[enemyId2].TeamIndex;
                     enemy2.teamScore = gameData.server_data.TeamScores[gameData.server_data.PlayerData[enemyId2].TeamIndex];
 
+                    
+                    // * Pre patch Black Adam
                     if (gameData.data.ratingUpdates) {
                         for (let j = 0; j < (gameData.data.ratingUpdates.playerRatingChanges).length; j++) {
                             if (idProfil == gameData.data.ratingUpdates.playerRatingChanges[j].playerAccountID) {
@@ -376,6 +396,28 @@ const dataMatchs = async (name) => {
                             if (enemyAccountId2 == gameData.data.ratingUpdates.playerRatingChanges[j].playerAccountID) {
                                 enemy2.preMmr = gameData.data.ratingUpdates.playerRatingChanges[j].preMatchRating.mean;
                                 enemy2.postMmr = gameData.data.ratingUpdates.playerRatingChanges[j].postMatchRating.mean;
+                            }
+                        }
+                    }
+                    
+                    // * Post patch Black Adam
+                    if (gameData.data.ratingUpdates) {
+                        for (let j = 0; j < (gameData.data.ratingUpdates.player_rating_changes).length; j++) {
+                            if (idProfil == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                                me.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                                me.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
+                            }
+                            if (allyAccountId == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                                ally.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                                ally.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
+                            }
+                            if (enemyAccountId == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                                enemy.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                                enemy.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
+                            }
+                            if (enemyAccountId2 == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                                enemy2.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                                enemy2.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
                             }
                         }
                     }
@@ -517,6 +559,7 @@ const dataMoreMatchs = async (name, page) => {
                 enemy.teamId = gameData.server_data.PlayerData[enemyId].TeamIndex;
                 enemy.teamScore = gameData.server_data.TeamScores[gameData.server_data.PlayerData[enemyId].TeamIndex];
                 
+                // * Pre patch Black Adam
                 if (gameData.data.ratingUpdates) {
                     for (let j = 0; j < (gameData.data.ratingUpdates.playerRatingChanges).length; j++) {
                         if (idProfil == gameData.data.ratingUpdates.playerRatingChanges[j].playerAccountID) {
@@ -526,6 +569,20 @@ const dataMoreMatchs = async (name, page) => {
                         if (enemyAccountId == gameData.data.ratingUpdates.playerRatingChanges[j].playerAccountID) {
                             enemy.preMmr = gameData.data.ratingUpdates.playerRatingChanges[j].preMatchRating.mean;
                             enemy.postMmr = gameData.data.ratingUpdates.playerRatingChanges[j].postMatchRating.mean;
+                        }
+                    }
+                }
+                
+                // * Post patch Black Adam
+                if (gameData.data.ratingUpdates) {
+                    for (let j = 0; j < (gameData.data.ratingUpdates.player_rating_changes).length; j++) {
+                        if (idProfil == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                            me.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                            me.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
+                        }
+                        if (enemyAccountId == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                            enemy.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                            enemy.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
                         }
                     }
                 }
@@ -756,6 +813,7 @@ const dataMoreMatchs = async (name, page) => {
                     enemy2.teamId = gameData.server_data.PlayerData[enemyId2].TeamIndex;
                     enemy2.teamScore = gameData.server_data.TeamScores[gameData.server_data.PlayerData[enemyId2].TeamIndex];
                     
+                    // * Pre patch Black Adam
                     if (gameData.data.ratingUpdates) {
                         for (let j = 0; j < (gameData.data.ratingUpdates.playerRatingChanges).length; j++) {
                             if (idProfil == gameData.data.ratingUpdates.playerRatingChanges[j].playerAccountID) {
@@ -773,6 +831,28 @@ const dataMoreMatchs = async (name, page) => {
                             if (enemyAccountId2 == gameData.data.ratingUpdates.playerRatingChanges[j].playerAccountID) {
                                 enemy2.preMmr = gameData.data.ratingUpdates.playerRatingChanges[j].preMatchRating.mean;
                                 enemy2.postMmr = gameData.data.ratingUpdates.playerRatingChanges[j].postMatchRating.mean;
+                            }
+                        }
+                    }
+                    
+                    // * Post patch Black Adam
+                    if (gameData.data.ratingUpdates) {
+                        for (let j = 0; j < (gameData.data.ratingUpdates.player_rating_changes).length; j++) {
+                            if (idProfil == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                                me.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                                me.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
+                            }
+                            if (allyAccountId == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                                ally.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                                ally.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
+                            }
+                            if (enemyAccountId == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                                enemy.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                                enemy.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
+                            }
+                            if (enemyAccountId2 == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
+                                enemy2.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
+                                enemy2.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
                             }
                         }
                     }

@@ -84,6 +84,7 @@ function getAllCharacters() {
     let data = [
         {'fullName':'character_arya', 'name':'arya'},
         {'fullName':'character_batman', 'name':'batman'},
+        {'fullName':'character_C021', 'name':'black_adam'},
         {'fullName':'character_bugs_bunny', 'name':'bugs_bunny'},
         {'fullName':'character_finn', 'name':'finn'},
         {'fullName':'character_garnet', 'name':'garnet'},
@@ -143,6 +144,8 @@ function nameCharacter(name) {
         name = 'rick';
     } else if (name == 'C023B') {
         name = 'stripe';
+    } else if (name == 'C021') {
+        name = 'black_adam';
     }
     return name;
 }
