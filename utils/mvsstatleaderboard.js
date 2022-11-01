@@ -1,4 +1,4 @@
-const { connectApi, deepFind, getAllCharacters, nameCharacter } = require("./functions");
+const { connectApi, deepFind, getAllCharacters, nameCharacter, toZeroIfNotExist } = require("./functions");
 const { Client } = require('multiversus.js');
 
 const dataLeaderboard = async (page = 1) => {
