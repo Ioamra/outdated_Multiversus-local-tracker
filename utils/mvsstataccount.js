@@ -223,7 +223,6 @@ const dataAccount = async (name) => {
                 if (gameData.data.ratingUpdates) {
                     if (gameData.data.ratingUpdates.player_rating_changes) {
                         for (let j = 0; j < (gameData.data.ratingUpdates.player_rating_changes).length; j++) {
-                            console.log(gameData.data.ratingUpdates.player_rating_changes[j]);
                             if (idProfil == gameData.data.ratingUpdates.player_rating_changes[j].player_account_id) {
                                 me.preMmr = gameData.data.ratingUpdates.player_rating_changes[j].pre_match_rating.mean;
                                 me.postMmr = gameData.data.ratingUpdates.player_rating_changes[j].post_match_rating.mean;
