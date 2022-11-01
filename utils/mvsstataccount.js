@@ -114,13 +114,11 @@ const dataAccount = async (name) => {
         } else {
             objTmp.level = 0;
         }
-        objTmp.win = deepFind(accountsData, 'server_data.stat_trackers.character_wins.' + key);
         const rankGlobalCharacter1v1 = await client.leaderboards.fetchCharacter('1v1', key);
         const rankGlobalCharacter2v2 = await client.leaderboards.fetchCharacter('2v2', key);
         const rankProfileCharacter1v1 = await client.leaderboards.fetchProfileCharacter(idProfil, '1v1', key);
         const rankProfileCharacter2v2 = await client.leaderboards.fetchProfileCharacter(idProfil, '2v2', key);
-
-        objTmp.win = deepFind(profilesData, 'server_data.stat_trackers.character_wins.' + key);
+        objTmp.win = toZeroIfNotExist(deepFind(profilesData, 'server_data.stat_trackers.character_wins.' + key));
 
         objTmp.rank1v1 = rankProfileCharacter1v1.rank;
         objTmp.score1v1 = rankProfileCharacter1v1.score;

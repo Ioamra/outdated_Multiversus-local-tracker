@@ -59,7 +59,7 @@ function deepFind(obj, path) {
     return current;
 }
 
-function toZeroIfNotExist (num) {
+function toZeroIfNotExist(num) {
     if (num == undefined) {
         return 0;
     } else {

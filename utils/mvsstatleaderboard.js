@@ -102,7 +102,7 @@ const dataLeaderboardCharacter = async (character, page = 1) => {
         const tmpProfilesData1v1 = await client.profiles.fetch(leaderboardData1v1.leaders[i].profile.account_id);
         const tmpAccountsData1v1 = await client.accounts.fetch(leaderboardData1v1.leaders[i].profile.account_id);
         objTmp1v1.avatar = tmpAccountsData1v1.server_data.ProfileIcon.Slug;
-        objTmp1v1.win = deepFind(tmpProfilesData1v1, 'server_data.stat_trackers.character_wins.' + character);
+        objTmp1v1.win = toZeroIfNotExist(deepFind(tmpProfilesData1v1, 'server_data.stat_trackers.character_wins.' + character));
 
         if (deepFind(tmpProfilesData1v1, 'data.PerkPreferences.Characters.' + character + '.PerkPages') != undefined) {
             objTmp1v1.perks1 = deepFind(tmpProfilesData1v1, 'data.PerkPreferences.Characters.' + character + '.PerkPages')[0].PerkSlugs[0];
@@ -126,7 +126,7 @@ const dataLeaderboardCharacter = async (character, page = 1) => {
         const tmpProfilesData2v2 = await client.profiles.fetch(leaderboardData2v2.leaders[i].profile.account_id);
         const tmpAccountsData2v2 = await client.accounts.fetch(leaderboardData2v2.leaders[i].profile.account_id);
         objTmp2v2.avatar = tmpAccountsData2v2.server_data.ProfileIcon.Slug;
-        objTmp2v2.win = deepFind(tmpProfilesData2v2, 'server_data.stat_trackers.character_wins.' + character);
+        objTmp2v2.win = toZeroIfNotExist(deepFind(tmpProfilesData2v2, 'server_data.stat_trackers.character_wins.' + character));
         
         if (deepFind(tmpProfilesData2v2, 'data.PerkPreferences.Characters.' + character + '.PerkPages') != undefined) {
             objTmp2v2.perks1 = deepFind(tmpProfilesData2v2, 'data.PerkPreferences.Characters.' + character + '.PerkPages')[0].PerkSlugs[0];
