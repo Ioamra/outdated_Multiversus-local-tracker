@@ -141,8 +141,10 @@ const dataAccount = async (name) => {
             objTmp.perks3 = "";
             objTmp.perks4 = "";
         }
-        const objForStreak = profilesData.server_data["1v1shuffle"][0];
-        objTmp.streak = deepFind(objForStreak, 'ratings.' + key + '.streak');
+        const objForStreak1v1 = profilesData.server_data["1v1shuffle"][0];
+        objTmp.streak1v1 = deepFind(objForStreak1v1, 'ratings.' + key + '.streak');
+        const objForStreak2v2 = profilesData.server_data["2v2shuffle"][0];
+        objTmp.streak2v2 = deepFind(objForStreak2v2, 'ratings.' + key + '.streak');
         charactersPlayed[x] = objTmp;
         x += 1;
     }

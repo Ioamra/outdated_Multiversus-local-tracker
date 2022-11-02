@@ -274,16 +274,6 @@ async function viewsInfoAccount(data) {
                 },
             },
             {
-                data: "streak",
-                render: (data, type, row, meta) => {
-                    if (row.streak == undefined) {
-                        return '<div style="color:black;">-999 999</div>';
-                    } else {
-                        return row.streak;
-                    }
-                },
-            },
-            {
                 data: "victoires",
                 render: (data, type, row, meta) => {
                     return row.win;
@@ -330,6 +320,16 @@ async function viewsInfoAccount(data) {
                 },
             },
             {
+                data: "streak1v1",
+                render: (data, type, row, meta) => {
+                    if (row.streak1v1 == undefined) {
+                        return '<div style="color:black;">-999 999</div>';
+                    } else {
+                        return row.streak1v1;
+                    }
+                },
+            },
+            {
                 data: "1v1Rank",
                 render: (data, type, row, meta) => {
                     if (row.rank1v1 == 0 || row.rank1v1 == null) {
@@ -356,6 +356,16 @@ async function viewsInfoAccount(data) {
                         return '<div style="color:black;">0</div>';
                     } else {
                         return '<div class="orange">' + numberWithSpaces(Math.round(Number(row.top1v1) * 10000) / 10000) + " %</div>";
+                    }
+                },
+            },
+            {
+                data: "streak2v2",
+                render: (data, type, row, meta) => {
+                    if (row.streak2v2 == undefined) {
+                        return '<div style="color:black;">-999 999</div>';
+                    } else {
+                        return row.streak2v2;
                     }
                 },
             },
