@@ -108,21 +108,14 @@ function veiwsInfoMatchs(data) {
         if (data[i] && first) {
             first = false;
             let mmrDiffMe, mmrDiffAlly, mmrDiffEnemy, mmrDiffEnemy2;
-            let date = new Date().toISOString();
-            let yearActu = Number(date.slice(0, 4));
-            let monthActu = Number(date.slice(5, 7));
-            let dayActu = Number(date.slice(8, 10));
-            let hoursActu = Number(date.slice(11, 13));
-            let minutesActu = Number(date.slice(14, 16));
-            let dateActu = new Date(yearActu, monthActu, dayActu, hoursActu, minutesActu);
 
             let yearGame = Number(data[i].completion_time.slice(0, 4));
             let monthGame = Number(data[i].completion_time.slice(5, 7));
             let dayGame = Number(data[i].completion_time.slice(8, 10));
             let hoursGame = Number(data[i].completion_time.slice(11, 13));
             let minutesGame = Number(data[i].completion_time.slice(14, 16));
-            let dateGame = new Date(yearGame, monthGame, dayGame, hoursGame, minutesGame);
-            dataDate = getTimeBetween(dateGame, dateActu, userLang);
+            let dateGame = new Date(yearGame, monthGame-1, dayGame, hoursGame+1, minutesGame);
+            dataDate = getTimeBetween(dateGame, new Date(), userLang);
 
             if (data[i].result == "win") {
                 $("#gameOne").addClass("border border-dark degrade-top-win");
@@ -472,21 +465,13 @@ function veiwsInfoMatchs(data) {
                 }
             }
         } else if (data[i]) {
-            let date = new Date().toISOString();
-            let yearActu = Number(date.slice(0, 4));
-            let monthActu = Number(date.slice(5, 7));
-            let dayActu = Number(date.slice(8, 10));
-            let hoursActu = Number(date.slice(11, 13));
-            let minutesActu = Number(date.slice(14, 16));
-            let dateActu = new Date(yearActu, monthActu, dayActu, hoursActu, minutesActu);
-
             let yearGame = Number(data[i].completion_time.slice(0, 4));
             let monthGame = Number(data[i].completion_time.slice(5, 7));
             let dayGame = Number(data[i].completion_time.slice(8, 10));
             let hoursGame = Number(data[i].completion_time.slice(11, 13));
             let minutesGame = Number(data[i].completion_time.slice(14, 16));
-            let dateGame = new Date(yearGame, monthGame, dayGame, hoursGame, minutesGame);
-            dataDate = getTimeBetween(dateGame, dateActu, userLang);
+            let dateGame = new Date(yearGame, monthGame-1, dayGame, hoursGame+1, minutesGame);
+            dataDate = getTimeBetween(dateGame, new Date(), userLang);
             dataGames += createLine(data[i]);
             if (data[i].mode == "1v1" || data[i].mode == "2v2") {
                 if (charactersHisto.find(o => o.character == data[i].me.character)) {
@@ -613,15 +598,7 @@ function veiwsInfoMatchs(data) {
 
 function veiwsMoreInfoMatchs(data) {
     let dataGames = "";
-    
-    let date = new Date().toISOString();
-    let yearActu = Number(date.slice(0, 4));
-    let monthActu = Number(date.slice(5, 7));
-    let dayActu = Number(date.slice(8, 10));
-    let hoursActu = Number(date.slice(11, 13));
-    let minutesActu = Number(date.slice(14, 16));
-    let dateActu = new Date(yearActu, monthActu, dayActu, hoursActu, minutesActu);
-    
+
     for (let i = 0; i < 25; i++) {
         if (data[i]) {
             let yearGame = Number(data[i].completion_time.slice(0, 4));
@@ -629,8 +606,8 @@ function veiwsMoreInfoMatchs(data) {
             let dayGame = Number(data[i].completion_time.slice(8, 10));
             let hoursGame = Number(data[i].completion_time.slice(11, 13));
             let minutesGame = Number(data[i].completion_time.slice(14, 16));
-            let dateGame = new Date(yearGame, monthGame, dayGame, hoursGame, minutesGame);
-            dataDate = getTimeBetween(dateGame, dateActu, userLang);
+            let dateGame = new Date(yearGame, monthGame-1, dayGame, hoursGame+1, minutesGame);
+            dataDate = getTimeBetween(dateGame, new Date(), userLang);
             dataGames += createLine(data[i]);
             if (data[i].mode == "1v1" || data[i].mode == "2v2") {
                 if (charactersHisto.find(o => o.character == data[i].me.character)) {
@@ -876,7 +853,6 @@ function createLine(data) {
 }
 
 function loadCharacterMmr(character) {
-    console.log(charactersHisto);
     if (character == "All" ||character == "Tous") {
         let totalWin1 = 0, totalLose1 = 0, totalWin2 = 0, totalLose2 = 0;
         for (let i = 0; i < charactersHisto.length; i++) {

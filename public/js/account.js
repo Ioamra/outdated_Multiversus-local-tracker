@@ -403,21 +403,13 @@ function veiwsInfoMatchs(data) {
     let dataGames = "";
     for (let i = 0; i < 25; i++) {
         if (data[i]) {
-            let date = new Date().toISOString();
-            let yearActu = Number(date.slice(0, 4));
-            let monthActu = Number(date.slice(5, 7));
-            let dayActu = Number(date.slice(8, 10));
-            let hoursActu = Number(date.slice(11, 13));
-            let minutesActu = Number(date.slice(14, 16));
-            let dateActu = new Date(yearActu, monthActu, dayActu, hoursActu, minutesActu);
-
             let yearGame = Number(data[i].completion_time.slice(0, 4));
             let monthGame = Number(data[i].completion_time.slice(5, 7));
             let dayGame = Number(data[i].completion_time.slice(8, 10));
             let hoursGame = Number(data[i].completion_time.slice(11, 13));
             let minutesGame = Number(data[i].completion_time.slice(14, 16));
-            let dateGame = new Date(yearGame, monthGame, dayGame, hoursGame, minutesGame);
-            dataDate = getTimeBetween(dateGame, dateActu, userLang);
+            let dateGame = new Date(yearGame, monthGame-1, dayGame, hoursGame+1, minutesGame);
+            dataDate = getTimeBetween(dateGame, new Date(), userLang);
             dataGames += createLine(data[i]);
             if (data[i].mode == "1v1" || data[i].mode == "2v2") {
                 if (charactersHisto.find(o => o.character == data[i].me.character)) {
