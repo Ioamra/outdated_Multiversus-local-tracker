@@ -49,78 +49,32 @@ function showSelect() {
                             '<option>100</option>'+
                             '<option>250</option>'+
                             '<option selected>500</option>';
-                    } else if (dataLoadMmrByRank == 500) {
+                    } else {
                         htmlSelectMmrByRank =
                             '<option>25</option>'+
                             '<option>50</option>'+
                             '<option>100</option>'+
-                            '<option>250</option>'+
-                            '<option selected>500</option>';
+                            '<option>250</option>';
+                        for (let i = 1; i < (dataLoadMmrByRank)/250; i++) {
+                            if(i == dataLoadMmrByRank/250-1) {
+                                htmlSelectMmrByRank += '<option selected>' + dataLoadMmrByRank + '</option>';
+                            } else {
+                                htmlSelectMmrByRank += '<option>' + (250*(i+1)) + '</option>';
+                            }
+                        }
                         htmlSelectTopCharactersPopularityByMmr =
                             '<option>25</option>'+
                             '<option>50</option>'+
                             '<option>100</option>'+
                             '<option>250</option>'+
-                            '<option>500</option>'+
-                            '<option>750</option>'+
-                            '<option selected>1000</option>';
-                    } else if (dataLoadMmrByRank == 750) {
-                        htmlSelectMmrByRank =
-                            '<option>25</option>'+
-                            '<option>50</option>'+
-                            '<option>100</option>'+
-                            '<option>250</option>'+
-                            '<option>500</option>'+
-                            '<option selected>750</option>';
-                        htmlSelectTopCharactersPopularityByMmr =
-                            '<option>25</option>'+
-                            '<option>50</option>'+
-                            '<option>100</option>'+
-                            '<option>250</option>'+
-                            '<option>500</option>'+
-                            '<option>750</option>'+
-                            '<option>1000</option>'+
-                            '<option selected>1500</option>';
-                    } else if (dataLoadMmrByRank == 1000) {
-                        htmlSelectMmrByRank =
-                            '<option>25</option>'+
-                            '<option>50</option>'+
-                            '<option>100</option>'+
-                            '<option>250</option>'+
-                            '<option>500</option>'+
-                            '<option>750</option>'+
-                            '<option selected>1000</option>';
-                        htmlSelectTopCharactersPopularityByMmr =
-                            '<option>25</option>'+
-                            '<option>50</option>'+
-                            '<option>100</option>'+
-                            '<option>250</option>'+
-                            '<option>500</option>'+
-                            '<option>750</option>'+
-                            '<option>1000</option>'+
-                            '<option>1500</option>'+
-                            '<option selected>2000</option>';
-                    } else if (dataLoadMmrByRank > 1000) {
-                        htmlSelectMmrByRank =
-                            '<option>25</option>'+
-                            '<option>50</option>'+
-                            '<option>100</option>'+
-                            '<option>250</option>'+
-                            '<option>500</option>'+
-                            '<option>750</option>'+
-                            '<option>1000</option>'+
-                            '<option selected>'+dataLoadMmrByRank+'</option>';
-                        htmlSelectTopCharactersPopularityByMmr =
-                            '<option>25</option>'+
-                            '<option>50</option>'+
-                            '<option>100</option>'+
-                            '<option>250</option>'+
-                            '<option>500</option>'+
-                            '<option>750</option>'+
-                            '<option>1000</option>'+
-                            '<option>1500</option>'+
-                            '<option>2000</option>'+
-                            '<option selected>2500</option>';
+                            '<option>500</option>';
+                            for (let i = 1; i < (dataLoadMmrByRank)/250; i++) {
+                                if(i == dataLoadMmrByRank/250-1) {
+                                    htmlSelectTopCharactersPopularityByMmr += '<option selected>' + dataLoadMmrByRank*2 + '</option>';
+                                } else {
+                                    htmlSelectTopCharactersPopularityByMmr += '<option>' + (500*(i+1)) + '</option>';
+                                }
+                            }
                     }
                     $('#selectMmrByRank').html(htmlSelectMmrByRank);
                     $('#selectTopCharactersPopularityByMmr').html(htmlSelectTopCharactersPopularityByMmr);
