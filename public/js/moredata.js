@@ -482,9 +482,7 @@ function viewsDataMmrByRank(data, nbData) {
                         color: 'white',
                         font: { size: 16 }
                     },
-                    grid: {
-                        color: 'rgb(20, 20, 20)'
-                    }
+                    grid: { color: 'rgb(20, 20, 20)' }
                 },
                 yAxis: {
                     ticks: { color: 'white' },
@@ -494,9 +492,7 @@ function viewsDataMmrByRank(data, nbData) {
                         color: 'white',
                         font: { size: 16 }
                     },
-                    grid: {
-                        color: 'rgb(20, 20, 20)'
-                    }
+                    grid: { color: 'rgb(20, 20, 20)' }
                 },
             },
             plugins: {
@@ -550,9 +546,7 @@ function viewsDataMmrByRank(data, nbData) {
                         color: 'white',
                         font: { size: 16 }
                     },
-                    grid: {
-                        color: 'rgb(20, 20, 20)'
-                    }
+                    grid: { color: 'rgb(20, 20, 20)' }
                 },
                 yAxis: {
                     ticks: { color: 'white' },
@@ -562,9 +556,7 @@ function viewsDataMmrByRank(data, nbData) {
                         color: 'white',
                         font: { size: 16 }
                     },
-                    grid: {
-                        color: 'rgb(20, 20, 20)'
-                    }
+                    grid: { color: 'rgb(20, 20, 20)' }
                 },
             },
             plugins: {
@@ -703,9 +695,7 @@ function viewsDataTopCharactersPopularityByMmr (data, dataMmr, nbData) {
                         color: 'white',
                         precision: 0
                     },
-                    grid: {
-                        color: 'rgb(20, 20, 20)'
-                    }
+                    grid: { color: 'rgb(20, 20, 20)' }
                 },
             },
             plugins: {
@@ -750,9 +740,7 @@ function viewsDataTopCharactersPopularityByMmr (data, dataMmr, nbData) {
                         color: 'white',
                         precision: 0
                     },
-                    grid: {
-                        color: 'rgb(20, 20, 20)'
-                    }
+                    grid: { color: 'rgb(20, 20, 20)' }
                 },
             },
             plugins: {
@@ -773,5 +761,341 @@ function viewsDataTopCharactersPopularityByMmr (data, dataMmr, nbData) {
                 }
             }
         }
+    });
+}
+
+function resetSaveAll1v1() {
+    fetch('mvsstatmoredata?method=resetSaveAll1v1')
+        .then(res => res.json())
+        .then(data => {
+            alert(data.res);
+            location.reload();
+    });
+}
+
+function saveAll1v1() {
+    $('.spinner-save-all1v1').css('display', 'block');
+    $('.spinner-save-all1v1').css('height', $('#btnSaveDataAll1v1').height());
+    $('#btnSaveDataAll1v1').addClass('disabled');
+    $('#btnSaveDataAll1v1').removeClass('mx-auto');
+
+    fetch('mvsstatmoredata?method=saveAll1v1')
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                $('.spinner-save-all1v1').css('display', 'none');
+                $('#btnSaveDataAll1v1').removeClass('disabled');
+                $('#btnSaveDataAll1v1').addClass('mx-auto');
+            }
+    });
+}
+
+function getAll1v1() {
+    $('#loader-all1v1').css('display', 'block');
+    $('#all1v1').html("");
+    fetch('mvsstatmoredata?method=loadSaveAll1v1')
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            console.log(data);
+            viewsAll1v1(data);
+            $('#loader-all1v1').css('display', 'none');
+        }
+    });
+}
+
+function viewsAll1v1 (data) {
+    let htmlAll1v1 = '<canvas id="canvasAll1v1" class="w-100 border border-secondary p-2 mb-3"></canvas>';
+    $('#all1v1').html(htmlAll1v1);
+    
+    var canvasData = [], canvasLabels = [], saveMmr = [], color = [], bgColor = [];
+
+    for (let i = 0; i < data.result.length; i++) {
+        if (i == 0) {
+            canvasData[0] = 1250;
+            canvasLabels[0] = Math.round(data.result[i]) + ' - *';
+            saveMmr.push(Math.round(data.result[i]));
+        } else if (i == 1) {
+            canvasData.push(1250);
+            canvasLabels.push(Math.round(data.result[i]) + ' - ' + saveMmr[saveMmr.length-1]);
+            saveMmr.push(Math.round(data.result[i]));
+        } else if (i == data.result.length-1) {
+            canvasData[canvasData.length-1] += 1250;
+            var countLoadPlayer = 0;
+            for (let j = 0; j < canvasData.length; j++) {
+                countLoadPlayer += canvasData[j]
+            }
+            canvasData[canvasData.length-1] += data.totalPlayers - countLoadPlayer;
+            canvasLabels[canvasData.length-1] = '* - ' + saveMmr[saveMmr.length-1];
+        } else {
+            if (saveMmr[saveMmr.length-2] - 50 < saveMmr[saveMmr.length-1] || Math.round(canvasData[canvasData.length-1]/data.totalPlayers*10000)/100 < 0.1) {
+                saveMmr[saveMmr.length-1] = Math.round(data.result[i]);
+                canvasData[canvasData.length-1] += 1250;
+                canvasLabels[canvasData.length-1] = saveMmr[saveMmr.length-1] + ' - ' + saveMmr[saveMmr.length-2];
+            } else {
+                saveMmr.push(Math.round(data.result[i]));
+                canvasData.push(1250);
+                canvasLabels.push(saveMmr[saveMmr.length-1] + ' - ' + saveMmr[saveMmr.length-2]);
+            }
+        }
+    }
+    
+    for (let i = 0; i < canvasData.length; i++) {
+        canvasData[i] = Math.round(canvasData[i] / data.totalPlayers * 10000) / 100;
+        color[i] = 'hsl(' + (360 / canvasData.length * i) + ', 100%, 50%)';
+        bgColor[i] = 'hsl(' + (360 / canvasData.length * i) + ', 100%, 50%, 0.5)';
+    }
+    canvasLabels = canvasLabels.reverse();
+    canvasData = canvasData.reverse();
+    var textTitle;
+    if (userLang == 'en') {
+        textTitle = 'MMR distribution in 1v1';
+    } else if (userLang == 'fr') {
+        textTitle = 'Répartition du MMR en 1v1';
+    } else {
+        textTitle = 'MMR distribution in 1v1';
+    }
+    
+    const ctxAll1v1 = document.getElementById('canvasAll1v1').getContext('2d');
+    const ChartAll1v1 = new Chart(ctxAll1v1, {
+        type: 'bar',
+        data: {
+            labels: canvasLabels,
+            datasets: [{
+                data: canvasData,
+                backgroundColor: bgColor,
+                borderColor: color,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                xAxis: {
+                    ticks: { color: 'white' }
+                },
+                yAxis: {
+                    ticks: { color: 'white' },
+                    grid: { color: 'rgb(20, 20, 20)' }
+                }
+            },
+            plugins: {
+                subtitle: {
+                    display: true,
+                    text: 'MMR',
+                    position: 'bottom',
+                    color: 'white',
+                    font: { size: 18 }
+                },
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    color: 'white',
+                    text: textTitle,
+                    padding: {
+                        top: 5,
+                        bottom: 30
+                    },
+                    font: {
+                        size: 30
+                    }
+                },
+                tooltip: {
+                    enabled: false
+                },
+                datalabels: {
+                    formatter: (val, context) => {
+                        let total = 0;
+                        let nbBar = context.dataset.data.length;
+                        for (let i = 0; i < nbBar - context.dataIndex; i++) {
+                            total += Math.round(context.dataset.data[nbBar -1 - i]*100)/100;
+                        }
+                        total = Math.round(total*100)/100;
+                        return val + ' %\n ('+total+' %)';
+                    },
+                    textAlign: 'center',
+                    color: 'white',
+                    anchor: 'end',
+                    align: 'top',
+                    font: {
+                        size: 10
+                    }
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+}
+
+function resetSaveAll2v2() {
+    fetch('mvsstatmoredata?method=resetSaveAll2v2')
+        .then(res => res.json())
+        .then(data => {
+            alert(data.res);
+            location.reload();
+    });
+}
+
+function saveAll2v2() {
+    $('.spinner-save-all2v2').css('display', 'block');
+    $('.spinner-save-all2v2').css('height', $('#btnSaveDataAll2v2').height());
+    $('#btnSaveDataAll2v2').addClass('disabled');
+    $('#btnSaveDataAll2v2').removeClass('mx-auto');
+
+    fetch('mvsstatmoredata?method=saveAll2v2')
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                $('.spinner-save-all2v2').css('display', 'none');
+                $('#btnSaveDataAll2v2').removeClass('disabled');
+                $('#btnSaveDataAll2v2').addClass('mx-auto');
+            }
+    });
+}
+
+function getAll2v2() {
+    $('#loader-all2v2').css('display', 'block');
+    $('#all2v2').html("");
+    fetch('mvsstatmoredata?method=loadSaveAll2v2')
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            console.log(data);
+            viewsAll2v2(data);
+            $('#loader-all2v2').css('display', 'none');
+        }
+    });
+}
+
+function viewsAll2v2 (data) {
+    let htmlAll2v2 = '<canvas id="canvasAll2v2" class="w-100 border border-secondary p-2 mb-3"></canvas>';
+    $('#all2v2').html(htmlAll2v2);
+    
+    var canvasData = [], canvasLabels = [], saveMmr = [], color = [], bgColor = [];
+
+    for (let i = 0; i < data.result.length; i++) {
+        if (i == 0) {
+            canvasData[0] = 1250;
+            canvasLabels[0] = Math.round(data.result[i]) + ' - *';
+            saveMmr.push(Math.round(data.result[i]));
+        } else if (i == 1) {
+            canvasData.push(1250);
+            canvasLabels.push(Math.round(data.result[i]) + ' - ' + saveMmr[saveMmr.length-1]);
+            saveMmr.push(Math.round(data.result[i]));
+        } else if (i == data.result.length-1) {
+            canvasData[canvasData.length-1] += 1250;
+            var countLoadPlayer = 0;
+            for (let j = 0; j < canvasData.length; j++) {
+                countLoadPlayer += canvasData[j]
+            }
+            canvasData[canvasData.length-1] += data.totalPlayers - countLoadPlayer;
+            canvasLabels[canvasData.length-1] = '* - ' + saveMmr[saveMmr.length-1];
+        } else {
+            if (saveMmr[saveMmr.length-2] - 50 < saveMmr[saveMmr.length-1] || Math.round(canvasData[canvasData.length-1]/data.totalPlayers*10000)/100 < 0.1) {
+                saveMmr[saveMmr.length-1] = Math.round(data.result[i]);
+                canvasData[canvasData.length-1] += 1250;
+                canvasLabels[canvasData.length-1] = saveMmr[saveMmr.length-1] + ' - ' + saveMmr[saveMmr.length-2];
+            } else {
+                saveMmr.push(Math.round(data.result[i]));
+                canvasData.push(1250);
+                canvasLabels.push(saveMmr[saveMmr.length-1] + ' - ' + saveMmr[saveMmr.length-2]);
+            }
+        }
+    }
+    
+    for (let i = 0; i < canvasData.length; i++) {
+        canvasData[i] = Math.round(canvasData[i] / data.totalPlayers * 10000) / 100;
+        color[i] = 'hsl(' + (360 / canvasData.length * i) + ', 100%, 50%)';
+        bgColor[i] = 'hsl(' + (360 / canvasData.length * i) + ', 100%, 50%, 0.5)';
+    }
+    canvasLabels = canvasLabels.reverse();
+    canvasData = canvasData.reverse();
+    var textTitle;
+    if (userLang == 'en') {
+        textTitle = 'MMR distribution in 2v2';
+    } else if (userLang == 'fr') {
+        textTitle = 'Répartition du MMR en 2v2';
+    } else {
+        textTitle = 'MMR distribution in 2v2';
+    }
+    
+    const ctxAll2v2 = document.getElementById('canvasAll2v2').getContext('2d');
+    const ChartAll2v2 = new Chart(ctxAll2v2, {
+        type: 'bar',
+        data: {
+            labels: canvasLabels,
+            datasets: [{
+                data: canvasData,
+                backgroundColor: bgColor,
+                borderColor: color,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                xAxis: {
+                    ticks: { color: 'white' }
+                },
+                yAxis: {
+                    ticks: { color: 'white' },
+                    grid: { color: 'rgb(20, 20, 20)' }
+                }
+            },
+            plugins: {
+                subtitle: {
+                    display: true,
+                    text: 'MMR',
+                    position: 'bottom',
+                    color: 'white',
+                    font: { size: 18 }
+                },
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    color: 'white',
+                    text: textTitle,
+                    padding: {
+                        top: 5,
+                        bottom: 30
+                    },
+                    font: {
+                        size: 30
+                    }
+                },
+                tooltip: {
+                    enabled: false
+                },
+                datalabels: {
+                    formatter: (val, context) => {
+                        let total = 0;
+                        let nbBar = context.dataset.data.length;
+                        for (let i = 0; i < nbBar - context.dataIndex; i++) {
+                            total += Math.round(context.dataset.data[nbBar -1 - i]*100)/100;
+                        }
+                        total = Math.round(total*100)/100;
+                        return val + ' %\n ('+total+' %)';
+                    },
+                    textAlign: 'center',
+                    color: 'white',
+                    anchor: 'end',
+                    align: 'top',
+                    font: {
+                        size: 10
+                    }
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
     });
 }

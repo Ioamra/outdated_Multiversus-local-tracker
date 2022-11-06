@@ -4,7 +4,7 @@ const { searchAccount } = require("./utils/mvsstatsearch");
 const { dataAccount } = require("./utils/mvsstataccount");
 const { dataMatchs, dataMoreMatchs } = require("./utils/mvsstatmatchs");
 const { dataLeaderboard, dataLeaderboardCharacter } = require("./utils/mvsstatleaderboard");
-const { dataCharactersPopularity, saveDataMmrByRank, getMmrTop, resetSave, loadSave } = require("./utils/mvsstatmoredata");
+const { dataCharactersPopularity, saveDataMmrByRank, getMmrTop, resetSave, loadSave, saveAll1v1, loadSaveAll1v1, resetSaveAll1v1, saveAll2v2, loadSaveAll2v2, resetSaveAll2v2 } = require("./utils/mvsstatmoredata");
 const app = express();
 const port = 3000;
 
@@ -31,6 +31,30 @@ app.get('/mvsstatmoredata', (req, res) => {
         });
     } else if (req.query.method == 'getMmrTop' && req.query.numTop) {
         getMmrTop(req.query.numTop).then(data => {
+            res.send(data);
+        });
+    } else if (req.query.method == 'saveAll1v1') {
+        saveAll1v1().then(data => {
+            res.send(data);
+        });
+    } else if (req.query.method == 'loadSaveAll1v1') {
+        loadSaveAll1v1().then(data => {
+            res.send(data);
+        });
+    } else if (req.query.method == 'resetSaveAll1v1') {
+        resetSaveAll1v1().then(data => {
+            res.send(data);
+        });
+    } else if (req.query.method == 'saveAll2v2') {
+        saveAll2v2().then(data => {
+            res.send(data);
+        });
+    } else if (req.query.method == 'loadSaveAll2v2') {
+        loadSaveAll2v2().then(data => {
+            res.send(data);
+        });
+    } else if (req.query.method == 'resetSaveAll2v2') {
+        resetSaveAll2v2().then(data => {
             res.send(data);
         });
     }

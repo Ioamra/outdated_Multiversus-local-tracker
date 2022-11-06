@@ -176,4 +176,125 @@ const loadSave = () => {
     });
 }
 
-module.exports = { dataCharactersPopularity, saveDataMmrByRank, getMmrTop, resetSave, loadSave };
+const saveAll1v1 = async () => {
+    const token = await connectApi();
+    const client = new Client({ accessToken: token });
+    const rankGlobal1v1 = await client.leaderboards.fetch('1v1');
+    var totalPlayers = rankGlobal1v1.total_leaders;
+    var obj = {}, result = [];
+    var iterate = Math.round(totalPlayers/25/50);
+    for (let i = 1; i < iterate; i++) {
+        console.log(i+' / '+ iterate);
+        const leaderboardData1v1 = await client.leaderboards.fetch('1v1', i*50);
+        result.push(Math.round(leaderboardData1v1.leaders[24].score * 100) / 100);
+    }
+    obj.result = result;
+    obj.totalPlayers = totalPlayers;
+
+    return new Promise((resolve, reject) => {
+        fs.writeFile('data1v1.txt', JSON.stringify(obj), err => {
+            if (err) {
+                console.log(err);
+                reject(new Error());
+            }
+            resolve({"res": true});
+        });
+    });
+}
+
+const loadSaveAll1v1 = async () => {
+    return new Promise((resolve, reject) => {
+        fs.readFile('data1v1.txt', 'utf8', (err, data) => {
+            if (err) {
+                console.error(err);
+                reject(new Error());
+            }
+            if (data) {
+                let obj = JSON.parse(data);
+                resolve(obj);
+            }
+        });
+    });
+}
+
+const resetSaveAll1v1 = async () => {
+    return new Promise((resolve, reject) => {
+        fs.readFile('data1v1.txt', 'utf8', async (err, data) => {
+            if (err) {
+                console.error(err);
+                reject(new Error());
+            }
+            fs.writeFile('data1v1.txt', "", err => {
+                if (err) {
+                    console.log(err);
+                    reject(new Error());
+                }
+                console.log("Datas deleted");
+                resolve({"res": "Datas deleted"});
+            });
+        });
+    });
+}
+
+
+const saveAll2v2 = async () => {
+    const token = await connectApi();
+    const client = new Client({ accessToken: token });
+    const rankGlobal2v2 = await client.leaderboards.fetch('2v2');
+    var totalPlayers = rankGlobal2v2.total_leaders;
+    var obj = {}, result = [];
+    var iterate = Math.round(totalPlayers/25/50);
+    for (let i = 1; i < iterate; i++) {
+        console.log(i+' / '+ iterate);
+        const leaderboardData2v2 = await client.leaderboards.fetch('2v2', i*50);
+        result.push(Math.round(leaderboardData2v2.leaders[24].score * 100) / 100);
+    }
+    obj.result = result;
+    obj.totalPlayers = totalPlayers;
+
+    return new Promise((resolve, reject) => {
+        fs.writeFile('data2v2.txt', JSON.stringify(obj), err => {
+            if (err) {
+                console.log(err);
+                reject(new Error());
+            }
+            resolve({"res": true});
+        });
+    });
+}
+
+const loadSaveAll2v2 = async () => {
+    return new Promise((resolve, reject) => {
+        fs.readFile('data2v2.txt', 'utf8', (err, data) => {
+            if (err) {
+                console.error(err);
+                reject(new Error());
+            }
+            if (data) {
+                let obj = JSON.parse(data);
+                resolve(obj);
+            }
+        });
+    });
+}
+
+const resetSaveAll2v2 = async () => {
+    return new Promise((resolve, reject) => {
+        fs.readFile('data2v2.txt', 'utf8', async (err, data) => {
+            if (err) {
+                console.error(err);
+                reject(new Error());
+            }
+            fs.writeFile('data2v2.txt', "", err => {
+                if (err) {
+                    console.log(err);
+                    reject(new Error());
+                }
+                console.log("Datas deleted");
+                resolve({"res": "Datas deleted"});
+            });
+        });
+    });
+}
+
+module.exports = { dataCharactersPopularity, saveDataMmrByRank, getMmrTop, resetSave, loadSave, saveAll1v1, loadSaveAll1v1, resetSaveAll1v1, saveAll2v2, loadSaveAll2v2, resetSaveAll2v2 };

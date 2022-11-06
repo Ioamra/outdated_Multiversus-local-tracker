@@ -19,6 +19,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.2.0/chartjs-plugin-zoom.min.js"></script>
+    <!-- chart.js-plugin-datalabels -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js" integrity="sha512-Tfw6etYMUhL4RTki37niav99C6OHwMDB2iBT5S5piyHO+ltK2YX8Hjy9TXxhE1Gm/TmAV0uaykSpnHKFIAif/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/functions.js"></script>
@@ -73,5 +75,31 @@
     </div>
     <div id="loader-topCharactersPopularityByMmr" class="text-center" style="display: none;"><img class="mx-auto" src="img/spinner.gif"></div>
     <div id="topCharactersPopularityByMmr" class="w-100 px-4 px-xxl-5 mt-5 mb-4"></div>
+
+    <!-- All 1v1 -->
+    <div class="d-flex align-items-center"><button class="btn btn-outline-secondary text-light mx-auto my-3 json-txt-btnResetData" onclick="resetSaveAll1v1();"></button></div>
+    <div class="d-flex align-items-center mb-3">
+        <img class="ms-auto me-2 spinner-save-all1v1" style="display: none;" src="img/spinner.gif">
+        <button id="btnSaveDataAll1v1" class="btn btn-outline-secondary text-light mx-auto json-txt-btnAddData" onclick="saveAll1v1();"></button>
+        <img class="me-auto ms-2 spinner-save-all1v1" style="display: none;" src="img/spinner.gif">
+    </div>
+    <div class="d-flex align-items-center">
+        <button class="btn btn-outline-secondary text-light mx-auto" onclick="getAll1v1();">All 1v1</button>
+    </div>
+    <div id="loader-all1v1" class="text-center" style="display: none;"><img class="mx-auto" src="img/spinner.gif"></div>
+    <div id="all1v1" class="w-100 px-4 px-xxl-5 mt-5 mb-4"></div>
+
+    <!-- All 2v2 -->
+    <div class="d-flex align-items-center"><button class="btn btn-outline-secondary text-light mx-auto my-3 json-txt-btnResetData" onclick="resetSaveAll2v2();"></button></div>
+    <div class="d-flex align-items-center mb-3">
+        <img class="ms-auto me-2 spinner-save-all2v2" style="display: none;" src="img/spinner.gif">
+        <button id="btnSaveDataAll2v2" class="btn btn-outline-secondary text-light mx-auto json-txt-btnAddData" onclick="saveAll2v2();"></button>
+        <img class="me-auto ms-2 spinner-save-all2v2" style="display: none;" src="img/spinner.gif">
+    </div>
+    <div class="d-flex align-items-center">
+        <button class="btn btn-outline-secondary text-light mx-auto" onclick="getAll2v2();">All 2v2</button>
+    </div>
+    <div id="loader-all2v2" class="text-center" style="display: none;"><img class="mx-auto" src="img/spinner.gif"></div>
+    <div id="all2v2" class="w-100 px-4 px-xxl-5 mt-5 mb-4"></div>
 </body>
 </html>
