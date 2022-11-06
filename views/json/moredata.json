@@ -8,7 +8,9 @@
         "btnMmrByRank": "Show for each character the top",
         "btnAddData": "Add data",
         "btnResetData": "Deleted stored data",
-        "btnTopCharactersPopularityByMmr": "Show character popularity for MMR above top"
+        "btnTopCharactersPopularityByMmr": "Show character popularity for MMR above top",
+        "btnAll1v1": "Show MMR distribution in 1v1",
+        "btnAll2v2": "Show MMR distribution in 2v2"
     },
     "fr": {
         "name": "Nom",
@@ -19,6 +21,8 @@
         "btnMmrByRank": "Afficher pour chaque personnage le top",
         "btnAddData": "Ajouter des données",
         "btnResetData": "Supprimé les données stockées",
-        "btnTopCharactersPopularityByMmr": "Afficher la popularité des personnages pour un MMR supérieur au top"
+        "btnTopCharactersPopularityByMmr": "Afficher la popularité des personnages pour un MMR supérieur au top",
+        "btnAll1v1": "Afficher la répartition du MMR en 1v1",
+        "btnAll2v2": "Afficher la répartition du MMR en 2v2"
     }
 }
