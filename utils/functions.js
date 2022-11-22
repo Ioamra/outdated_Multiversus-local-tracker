@@ -92,6 +92,7 @@ function getAllCharacters() {
         {'fullName':'character_harleyquinn', 'name':'harleyquinn'},
         {'fullName':'character_jake', 'name':'jake'},
         {'fullName':'character_c16', 'name':'lebron_james'},
+        {'fullName':'character_C018', 'name':'marvin'},
         {'fullName':'character_c019', 'name':'morty'},
         {'fullName':'character_creature', 'name':'reindog'},
         {'fullName':'character_C020', 'name':'rick'},
@@ -146,6 +147,8 @@ function nameCharacter(name) {
         name = 'stripe';
     } else if (name == 'C021') {
         name = 'black_adam';
+    } else if (name == 'C018') {
+        name = 'marvin';
     }
     return name;
 }
