@@ -154,21 +154,23 @@ function nameCharacter(name) {
 }
 
 function nameMap(name) {
-    if (name == '/Game/Panda_Main/Maps/ScoobyMansion/Map_ScoobyDoo.Map_ScoobyDoo') {
+    if (name == 'map_scooby_doo') {
         name = 'scooby';
-    } else if (name == '/Game/Panda_Main/Maps/M011/Maps/Small/Map_M011_Small.Map_M011_Small' || name == '/Game/Panda_Main/Maps/M011/Map_M011.Map_M011') {
+    } else if (name == 'map_scooby_doo_noroof') {
+        name = 'scoobyNoRoof';
+    } else if (name == 'map_m011_small' || name == 'map_m011') {
         name = 'skyArenaPlatforms';
-    } else if (name == '/Game/Panda_Main/Maps/M009/Map_M009_small.Map_M009_small' || name == '/Game/Panda_Main/Maps/M009/Map_M009.Map_M009') {
+    } else if (name == 'map_m009_1v1' || name == 'map_m009') {
         name = 'cromulons';
-    } else if (name == '/Game/Panda_Main/Maps/TrophyRoom/Map_TrophyRoom_LargePlatform.Map_TrophyRoom_LargePlatform') {
+    } else if (name == 'map_trophy_room_large_platform') {
         name = 'trophyEdge';
-    } else if (name == '/Game/Panda_Main/Maps/TrophyRoom/Map_TrophyRoom_2platforms.Map_TrophyRoom_2platforms') {
+    } else if (name == 'map_trophy_room_2_platform') {
         name = 'trophyEdge2';
-    } else if (name == '/Game/Panda_Main/Maps/M011/Maps/SmallNoPlat/Map_M011_SmallNoPlat.Map_M011_SmallNoPlat' || name == '/Game/Panda_Main/Maps/M011/Maps/LargeNoPlat/Map_M011_LargeNoPlat.Map_M011_LargeNoPlat') {
+    } else if (name == 'map_m011_smallnoplat' || name == 'map_m011_largenoplat') {
         name = 'skyArena';
-    } else if (name == '/Game/Panda_Main/Maps/Map_TreeHouseSmall/Map_TreeHouseSmall.Map_TreeHouseSmall' || name == '/Game/Panda_Main/Maps/Map_TreeHouse/Map_TreeHouse.Map_TreeHouse') {
+    } else if (name == 'map_tree_house_1v1' || name == 'map_tree_house_2v2') {
         name = 'treeFort';
-    } else if (name == '/Game/Panda_Main/Maps/Map_Batcave/Map_Batcave.Map_Batcave') {
+    } else if (name == 'map_batcave') {
         name = 'batcave';
     }
     return name;
